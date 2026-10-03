@@ -2,29 +2,47 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#19191c">
-<meta name="description" content="五对五弹指足球。两人同屏，拖拽蓄力，用走位与反弹赢下比赛。">
-<title>弹指足球 · 双人对战</title>
+<meta name="description" content="五对五弹指足球。单人挑战三档 AI，或与好友同屏对战。拖拽蓄力，用走位与反弹赢下比赛。">
+<title>弹指足球 · 单人挑战与双人对战</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2319191c'/%3E%3Ccircle cx='11' cy='17' r='7' fill='%2339bdf2' stroke='%23fff5d7' stroke-width='2'/%3E%3Ccircle cx='24' cy='12' r='4' fill='%23fa346c'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=solo-ai-1">
 </head>
 <body>
 <main class="game-shell">
-<header class="masthead"><div><div class="eyebrow"><b>F.</b> FLICK FOOTBALL / 双人弹指足球</div><h1>FIVE-A-SIDE.<em>TAKEOVER.</em></h1></div><div class="match-label"><b>LOCAL MATCH</b><span>两位玩家 · 各五枚棋子</span></div></header>
+<header class="masthead"><div><div class="eyebrow"><b>F.</b> FLICK FOOTBALL / 五人制弹指足球</div><h1>FIVE-A-SIDE.<em>TAKEOVER.</em></h1></div><div class="match-label"><b id="matchType">AI CHALLENGE</b><span id="matchInfo">单人挑战 · 各五枚棋子</span></div></header>
 <section class="scoreboard" aria-label="比赛比分">
-<div class="team team-green" id="team0"><span class="team-number">01</span><div><div class="team-name">冰蓝队</div><div class="team-meta">向右进攻</div></div></div>
+<div class="team team-green" id="team0"><span class="team-number">01</span><div><div class="team-name">冰蓝队</div><div class="team-meta" id="team0Meta">你 · 向右进攻</div></div></div>
 <div class="score-center"><div class="score"><span id="score0">0</span><span class="score-separator">:</span><span id="score1">0</span></div><span class="race">先入 3 球获胜</span></div>
-<div class="team team-gold" id="team1"><div><div class="team-name">玫红队</div><div class="team-meta">向左进攻</div></div><span class="team-number">02</span></div>
+<div class="team team-gold" id="team1"><div><div class="team-name">玫红队</div><div class="team-meta" id="team1Meta">AI · 向左进攻</div></div><span class="team-number">02</span></div>
 </section>
-<div class="match-toolbar"><div class="match-status" id="status" aria-live="polite">五对五，准备开球</div><div class="toolbar-actions"><button id="sound" type="button" aria-pressed="false">音效：关</button><button id="pause" type="button" disabled>暂停</button><button id="restart" type="button">重新开局</button></div></div>
-<section class="arena" aria-label="弹指足球球场">
+<div class="match-toolbar"><div class="match-status" id="status" aria-live="polite">五对五，准备开球</div><div class="toolbar-actions"><button id="menu" type="button">模式菜单</button><button id="sound" type="button" aria-pressed="false">音效：关</button><button id="pause" type="button" disabled>暂停</button><button id="restart" type="button">重新开局</button></div></div>
+<section class="arena show-menu" aria-label="弹指足球球场">
 <canvas id="pitch" width="1080" height="600" role="img" aria-label="每队五个圆形棋子。按住本方棋子向后拖动，松开弹射，撞白球进入对方球门。">请用新版浏览器打开游戏。</canvas>
-<div class="overlay" id="overlay"><img class="athlete" src="assets/athlete.png" alt=""><div class="overlay-content"><span class="overlay-kicker" id="overlayKicker">YOUR TURN. YOUR GAME.</span><h2 id="overlayTitle">MAKE YOUR<em>MOVE.</em></h2><p id="overlayText">五对五。看准空当，一击制胜。</p><button type="button" id="start" class="start-button">开始对战</button><span class="start-hint">鼠标拖拽或手指滑动</span></div></div>
+<div class="overlay is-menu" id="overlay"><img class="athlete" src="assets/athlete.png" alt=""><div class="overlay-content"><span class="overlay-kicker" id="overlayKicker">YOUR TURN. YOUR GAME.</span><h2 id="overlayTitle">MAKE YOUR<em>MOVE.</em></h2><p id="overlayText">五对五。看准空当，一击制胜。</p>
+<div class="menu-options" id="menuOptions">
+  <div class="mode-options" role="group" aria-label="比赛模式">
+    <button class="mode-option" id="modeSingle" type="button" aria-pressed="true"><strong>单人挑战</strong><span>与 AI 交手</span></button>
+    <button class="mode-option" id="modeMulti" type="button" aria-pressed="false"><strong>同屏双人</strong><span>好友轮流出手</span></button>
+  </div>
+  <div class="difficulty-options" id="difficultyOptions" role="group" aria-label="AI 难度">
+    <div class="menu-label">AI 难度<span>选择你的挑战</span></div>
+    <div class="difficulty-buttons">
+      <button class="difficulty-option" id="difficultyLow" type="button" aria-pressed="false"><strong>低</strong><span>轻松热身</span></button>
+      <button class="difficulty-option" id="difficultyMedium" type="button" aria-pressed="true"><strong>中</strong><span>认真过招</span></button>
+      <button class="difficulty-option" id="difficultyHigh" type="button" aria-pressed="false"><strong>高</strong><span>全力应战</span></button>
+    </div>
+    <p id="difficultyHelp" class="difficulty-help" aria-live="polite">攻守兼顾，适合来一场势均力敌的较量。</p>
+  </div>
+</div>
+<button type="button" id="start" class="start-button">开始对战</button><button type="button" id="resumeMatch" class="resume-match" hidden>继续当前比赛</button><span class="start-hint">鼠标拖拽或手指滑动</span></div></div>
 <div class="goal-call" id="goalCall" aria-hidden="true"><span id="goalTeam"></span><strong>进球！</strong></div>
 </section>
 <div class="shot-bar"><div class="turn-chip" id="turnChip"><span id="turnDot"></span><strong id="turnText">冰蓝队先手</strong></div><div class="power-label">力度 <div class="power-track" role="progressbar" aria-label="击球力度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="powerTrack"><div id="powerFill"></div></div><span id="powerValue">0%</span></div></div>
 <section class="instructions" aria-label="玩法"><div><b>1</b><span>按住本方圆片</span></div><div><b>2</b><span>向后拖拽蓄力</span></div><div><b>3</b><span>松开，撞球射门</span></div></section>
-<footer><span>所有圆片停稳后，轮到另一方 · 乌龙球也计分</span><span>空格暂停 · 同屏双人</span></footer>
+<footer><span>所有圆片停稳后，轮到另一方 · 乌龙球也计分</span><span id="footerMode">空格暂停 · 单人挑战</span></footer>
 </main>
-<script src="game.js"></script>
+<script src="physics.js?v=solo-ai-1"></script>
+<script src="ai.js?v=solo-ai-1"></script>
+<script src="game.js?v=solo-ai-1"></script>
 </body>
 </html>

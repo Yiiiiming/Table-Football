@@ -23,12 +23,14 @@ jobs:
           node-version: '22'
       - name: Check game
         run: |
+          node --check physics.js
+          node --check ai.js
           node --check game.js
-          node --test tests/game.test.cjs
+          node --test tests/*.test.cjs
       - name: Prepare website
         run: |
           mkdir _site
-          cp index.html style.css game.js .nojekyll _site/
+          cp index.html style.css physics.js ai.js game.js .nojekyll _site/
           cp -R assets _site/assets
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
