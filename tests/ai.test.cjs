@@ -118,6 +118,18 @@ test('high AI rejects an obvious own-goal shot and still moves the ball safely',
   assert(Math.hypot(board.ball.x - 110, board.ball.y - 300) > 5, 'computer makes useful ball contact');
 });
 
+test('easy AI retreats safely when both imprecise attacking choices would concede', () => {
+  const board = kickoff();
+  Object.assign(board.ball, { x: 110, y: 300 });
+  Object.assign(board.pieces[0], { x: 170, y: 300 });
+  for (const power of [.75, .6]) {
+    assert.equal(play(structuredClone(board), 0, { number: 1, angle: Math.PI, power }), 1);
+  }
+  const decision = plan(board, 0, 'low', () => .5);
+  assert.notEqual(play(board, 0, decision.result), 1, 'a safe fallback beats knowingly scoring an own goal');
+  assert(decision.calls <= 100);
+});
+
 test('difficulties change search and accuracy without changing physical abilities', t => {
   const board = kickoff(), low = plan(board, 0, 'low', () => .2);
   const medium = plan(board, 0, 'medium'), high = plan(board, 0, 'high');

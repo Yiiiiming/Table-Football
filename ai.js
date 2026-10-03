@@ -83,7 +83,7 @@
 
     const nearest = (bodies, target, side) => Math.min(...bodies.filter(p => p.team === side).map(p => distance(p, target) - p.r - target.r));
     const startNearest = nearest(original, startingBall, team);
-    let index = 0, best = null, bestValue = -Infinity, result = null;
+    let index = 0, fallback = 0, best = null, bestValue = -Infinity, result = null;
     let evaluated = 0, simulatedSteps = 0;
 
     function evaluate(shot) {
@@ -133,6 +133,13 @@
         const shot = candidates[index++];
         const value = evaluate(shot); evaluated++;
         if (value > bestValue) { bestValue = value; best = shot; }
+        // If every attacking choice concedes, test a gentle move away from the
+        // ball before accepting an own goal. Added lazily, one trial per frame.
+        if (index === candidates.length && bestValue <= -50000 && fallback < allies.length) {
+          const piece = allies[fallback++];
+          add(piece, directAngle(piece) + Math.PI, .08);
+          return null;
+        }
         // Easy mode keeps its deliberate imprecision unless that choice would
         // immediately concede; medium/high stop once an exact goal is found.
         if (value === 100000 || (level === 'low' && value > -50000) || index === candidates.length) {

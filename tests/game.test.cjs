@@ -65,3 +65,11 @@ test('agent resume also continues a match held in the mode menu',()=>{
   const g=game({mode:'single'}),control=g.tools.find(t=>t.name==='control_flick_football_match');
   g.state.scores[1]=1;g.openMenu();assert.equal(control.execute({action:'resume'}).phase,'aiming');assert.equal(g.state.scores[1],1);
 });
+
+test('real easy AI can execute its gentle retreat through the live turn controller',()=>{
+  const g=game({mode:'single',plannerFactory:(...args)=>require('../ai.js').createPlanner(...args,()=>.5)}),s=g.state;
+  s.turn=1;s.difficulty='low';Object.assign(s.ball,{x:970,y:300});Object.assign(s.pieces.find(p=>p.team===1&&p.number===1),{x:910,y:300});
+  g.pauseMatch();g.pauseMatch();advanceAI(g);assert.equal(s.phase,'moving','minimum-power AI shot must pass the drag threshold');
+  for(let i=0;i<180*16&&s.phase==='moving';i++)g.update(1/180);
+  assert.equal(s.scores[0],0,'AI does not score an own goal');assert.equal(s.turn,0);assert.equal(s.phase,'aiming');
+});
