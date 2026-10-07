@@ -6,6 +6,7 @@
 <title>弹指足球 Beta · 球员大乱斗</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2319191c'/%3E%3Ccircle cx='11' cy='17' r='7' fill='%2339bdf2' stroke='%23fff5d7' stroke-width='2'/%3E%3Ccircle cx='24' cy='12' r='4' fill='%23fa346c'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="style.css?v=beta-3">
+<link rel="stylesheet" href="menu.css?v=menu-4">
 </head>
 <body>
 <main class="game-shell">
@@ -21,8 +22,8 @@
 <canvas id="pitch" width="1080" height="600" role="img" aria-label="每队五位球员。按住本方圆片向后拖动，松开弹射，撞白球进入对方球门。">请用新版浏览器打开游戏。</canvas>
 <div class="overlay is-menu" id="overlay">
 <img class="athlete" src="../assets/athlete.png" alt="">
-<div class="overlay-content">
-<div class="menu-intro"><span class="overlay-kicker" id="overlayKicker">CHOOSE YOUR MATCH.</span><h2 id="overlayTitle">YOUR MATCH.<em>YOUR RULES.</em></h2><p id="overlayText">先选玩法与对手，再到阵型图安排五人首发。</p></div>
+<div class="overlay-content" data-menu-step="mode">
+<div class="menu-intro"><span class="overlay-kicker" id="overlayKicker">CHOOSE YOUR MATCH.</span><h2 id="overlayTitle">YOUR MATCH.</h2><p id="overlayText">先选玩法与对手，再到阵型图安排五人首发。</p></div>
 <div class="menu-options" id="menuOptions">
 <nav class="menu-progress" aria-label="开赛步骤"><span id="menuProgressMode" aria-current="step"><b>01</b> 选择模式</span><i aria-hidden="true"></i><span id="menuProgressLineup"><b>02</b> 调整阵容</span></nav>
 <section id="menuStepMode" class="menu-step mode-step" aria-label="第一步，选择比赛模式">
@@ -30,15 +31,25 @@
   <section class="setup-block" aria-labelledby="ruleLabel">
     <div class="menu-label" id="ruleLabel"><span class="section-index">01</span>选择玩法</div>
     <div class="rule-options" role="group" aria-label="玩法规则">
-      <button class="rule-option" id="ruleBrawl" type="button" aria-pressed="true"><span class="rule-symbol" aria-hidden="true">✦</span><span><strong>球员大乱斗</strong><small>专属技能 · 自选阵容</small></span><b class="new-label">NEW</b></button>
-      <button class="rule-option" id="ruleClassic" type="button" aria-pressed="false"><span class="rule-symbol classic-symbol" aria-hidden="true">◉</span><span><strong>经典模式</strong><small>纯粹弹指足球，无球员技能</small></span></button>
+      <button class="rule-option" id="ruleBrawl" type="button" aria-pressed="true">
+        <span class="mode-card-top"><span>PLAYER BRAWL</span><span class="choice-mark" aria-hidden="true">✓</span></span>
+        <span class="mode-card-art brawl-art" aria-hidden="true"><span class="art-orbit"></span><img class="art-player art-player-left" src="assets/players/modi.png" alt=""><img class="art-player art-player-right" src="assets/players/fandui.png" alt=""><img class="art-player art-player-main" src="assets/players/haaland.png" alt=""></span>
+        <span class="mode-card-copy"><strong>球员大乱斗</strong><small>挑选五位球员，用专属技能改写比赛。</small><span class="mode-card-tags"><span>12 位球员</span><span>自由配队</span></span></span>
+      </button>
+      <button class="rule-option" id="ruleClassic" type="button" aria-pressed="false">
+        <span class="mode-card-top"><span>CLASSIC MATCH</span><span class="choice-mark" aria-hidden="true">✓</span></span>
+        <span class="mode-card-art classic-art" aria-hidden="true">
+          <svg viewBox="0 0 280 180" fill="none"><rect x="12" y="16" width="256" height="148" rx="12" fill="#183039" stroke="#6a98a3" stroke-opacity=".6"/><path d="M140 16v148M12 55h38v70H12m256-70h-38v70h38" stroke="#91b6bc" stroke-opacity=".4"/><circle cx="140" cy="90" r="30" stroke="#91b6bc" stroke-opacity=".4"/><g fill="#42c5ee" stroke="#b5edff" stroke-width="2"><circle cx="38" cy="67" r="9"/><circle cx="38" cy="90" r="9"/><circle cx="38" cy="113" r="9"/><circle cx="105" cy="52" r="9"/><circle cx="105" cy="128" r="9"/></g><g fill="#db4f7c" stroke="#ffb5cb" stroke-width="2"><circle cx="242" cy="67" r="9"/><circle cx="242" cy="90" r="9"/><circle cx="242" cy="113" r="9"/><circle cx="175" cy="52" r="9"/><circle cx="175" cy="128" r="9"/></g><circle cx="140" cy="90" r="6" fill="#f4f4e9"/><path d="M139 87l4 2-1 4h-4l-1-4z" fill="#35434c"/></svg>
+        </span>
+        <span class="mode-card-copy"><strong>经典模式</strong><small>没有技能，靠角度、力度和配合取胜。</small><span class="mode-card-tags"><span>纯粹技巧</span><span>公平对抗</span></span></span>
+      </button>
     </div>
   </section>
-  <section class="setup-block" aria-labelledby="opponentLabel">
+  <section class="setup-block opponent-panel" aria-labelledby="opponentLabel">
     <div class="menu-label" id="opponentLabel"><span class="section-index">02</span>选择对手</div>
     <div class="mode-options" role="group" aria-label="对战人数">
-      <button class="mode-option" id="modeSingle" type="button" aria-pressed="true"><strong>单人挑战</strong><span>与 AI 交手</span></button>
-      <button class="mode-option" id="modeMulti" type="button" aria-pressed="false"><strong>同屏双人</strong><span>好友轮流出手</span></button>
+      <button class="mode-option" id="modeSingle" type="button" aria-pressed="true"><span class="opponent-icon" aria-hidden="true">01</span><strong>单人挑战</strong><span>与 AI 交手</span></button>
+      <button class="mode-option" id="modeMulti" type="button" aria-pressed="false"><span class="opponent-icon" aria-hidden="true">02</span><strong>同屏双人</strong><span>好友轮流出手</span></button>
     </div>
     <div class="difficulty-options" id="difficultyOptions" role="group" aria-label="AI 难度">
       <div class="menu-label difficulty-label">AI 难度<span>选择你的挑战</span></div>
@@ -52,7 +63,7 @@
   </section>
 </div>
 
-<div class="mode-step-footer"><p>先决定怎么玩，下一步再排兵布阵。</p><button id="draftNext" type="button" class="next-step-button">下一步 · 调整阵容 <span aria-hidden="true">→</span></button></div>
+<div class="mode-step-footer"><p><strong>选好玩法，排出你的五人阵容。</strong><span>下一步可选择站位、拖拽球员。</span></p><button id="draftNext" type="button" class="next-step-button">下一步 · 调整阵容 <span aria-hidden="true">→</span></button></div>
 </section>
 <section id="menuStepLineup" class="menu-step lineup-step" aria-label="第二步，调整阵容" hidden>
 <div class="lineup-step-heading"><button type="button" id="draftBack" class="back-step-button">← 返回模式选择</button><span id="draftSettingsSummary" class="settings-summary"></span></div>
@@ -97,7 +108,7 @@
 <script src="physics.js?v=beta-3"></script>
 <script src="skills.js?v=beta-3"></script>
 <script src="ai.js?v=beta-3"></script>
-<script src="draft.js?v=beta-3"></script>
-<script src="game.js?v=beta-3"></script>
+<script src="draft.js?v=menu-4"></script>
+<script src="game.js?v=menu-4"></script>
 </body>
 </html>

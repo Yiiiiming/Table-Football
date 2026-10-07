@@ -100,7 +100,7 @@
     $('overlay').classList.add('is-menu');canvas.parentElement.classList.add('show-menu');$('overlay').hidden=false;
     $('overlayTitle').textContent='BUILD YOUR FIVE.';$('overlayText').textContent='经典对战，或挑选五人阵容挑战球员大乱斗。';$('overlayKicker').textContent='YOUR TURN. YOUR GAME.';
     $('menuOptions').hidden=false;$('resumeMatch').hidden=!state.resumePhase;
-    $('status').textContent=state.resumePhase?'当前比赛已暂停 · 开始新比赛将重置比分':'选择模式，准备开球';draft?.resetMenu?.();syncMenu();syncUI();lockBackground(true);$('draftNext').focus?.({preventScroll:true});
+    $('status').textContent=state.resumePhase?'当前比赛已暂停 · 开始新比赛将重置比分':'选择模式，准备开球';draft?.resetMenu?.();syncMenu();syncUI();lockBackground(true);$('overlayTitle').tabIndex=-1;$('overlayTitle').focus?.({preventScroll:true});
   }
   function resumeFromMenu(){
     if(!state.resumePhase)return;state.phase=state.resumePhase;state.resumePhase=null;hideOverlay();
@@ -237,6 +237,6 @@
   if(document.modelContext?.registerTool){const lifecycle=new AbortController();const definitions=[{name:'read_flick_football_match',description:'读取五对五弹指足球的比分与当前回合。',inputSchema:{type:'object',properties:{},additionalProperties:false},annotations:{readOnlyHint:true},execute(input){if(input&&Object.keys(input).length)throw new Error('No parameters accepted');return snapshot();}},{name:'control_flick_football_match',description:'按菜单选择开始、暂停、继续或重开弹指足球。重开会清空比分。',inputSchema:{type:'object',properties:{action:{type:'string',enum:['start','pause','resume','restart']}},required:['action'],additionalProperties:false},annotations:{readOnlyHint:false},execute(input){if(!input||Object.keys(input).length!==1||!['start','pause','resume','restart'].includes(input.action))throw new Error('Invalid action');if(input.action==='start'&&state.phase==='ready'&&draft?.canStart?.()!==false)startMatch();if(input.action==='restart')restartMatch();if(input.action==='resume'&&state.phase==='ready'&&state.resumePhase)resumeFromMenu();if(input.action==='pause'&&playable()||input.action==='resume'&&state.phase==='paused')pauseMatch();return snapshot();}}];for(const tool of definitions)try{Promise.resolve(document.modelContext.registerTool(tool,{signal:lifecycle.signal})).catch(()=>{});}catch{}window.addEventListener('pagehide',()=>lifecycle.abort(),{once:true});}
   draft=globalThis.FlickDraft.mount({getSettings:()=>selection});
   for(const player of roster.players){const img=new Image();portraitImages.set(player.id,img);img.onload=()=>draw();img.src=player.asset;}
-  lockBackground(true);$('draftNext').focus?.({preventScroll:true});
+  lockBackground(true);$('overlayTitle').tabIndex=-1;$('overlayTitle').focus?.({preventScroll:true});
   setupPieces();syncMenu();syncUI();draw();requestAnimationFrame(frame);
 })();

@@ -1,0 +1,190 @@
+/* Match setup. Stretch both steps; the old grid alignment must not shrink flex children. */
+.overlay.is-menu .menu-options{align-items:stretch}
+.overlay.is-menu .menu-step{width:100%;align-self:stretch}
+.overlay.is-menu:has(.overlay-content[data-menu-step="mode"]){display:grid;place-items:center;background:radial-gradient(ellipse at 15% 10%,#24363e55,transparent 55%),#15161a}
+.overlay.is-menu:has(.overlay-content[data-menu-step="mode"])>.athlete{display:none}
+.overlay.is-menu .overlay-content[data-menu-step="mode"]{width:100%;max-width:1440px;height:min(100dvh,880px);padding:clamp(20px,3vh,38px) clamp(20px,4vw,56px);margin:0 auto;overflow:hidden;background:transparent}
+.overlay.is-menu .overlay-content[data-menu-step="mode"] .menu-intro{margin:0 0 22px;padding:0;border:0;flex:none}
+.overlay.is-menu .overlay-content[data-menu-step="mode"] .overlay-kicker{display:block;color:#9bc1cd;font-size:10px;letter-spacing:.2em}
+.overlay.is-menu .overlay-content[data-menu-step="mode"] h2{display:block;font-size:clamp(36px,4.3vw,62px);line-height:1;margin:10px 0 9px;letter-spacing:-.02em;outline:none}
+.overlay.is-menu .overlay-content[data-menu-step="mode"] #overlayText{display:block;font-size:13px;line-height:1.5;margin:0;color:#929ca9;max-width:none}
+.overlay-content[data-menu-step="mode"] #menuOptions{width:100%;min-height:0;flex:1;align-items:stretch;gap:0;overflow:visible}
+.overlay-content[data-menu-step="mode"] .menu-progress{margin:0 0 20px;gap:16px;font-size:11px;line-height:1.5}
+.overlay-content[data-menu-step="mode"] .menu-progress [aria-current="step"]{color:#d5f4ff}
+.overlay-content[data-menu-step="mode"] .menu-progress i{width:42px;background:#485461}
+#menuStepMode{width:100%;align-self:stretch;display:grid;grid-template-rows:minmax(0,1fr) auto;align-content:stretch;justify-content:normal;gap:24px;flex:1;min-height:0;padding:0;overflow:visible}
+#menuStepMode .match-setup{display:grid;grid-template-columns:minmax(0,1.85fr) minmax(290px,1fr);align-items:stretch;width:100%;max-width:none;min-height:0;gap:26px;margin:0}
+#menuStepMode .setup-block{display:flex;flex-direction:column;min-height:0;padding:0;gap:0}
+#menuStepMode .menu-label{font-size:13px;line-height:1.3;letter-spacing:.04em;flex:none;margin:0 0 15px;justify-content:flex-start;gap:10px;color:#e5ebf0}
+#menuStepMode .section-index{font-size:10px;color:#7293a1;border-color:#41505b}
+#menuStepMode .rule-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;min-height:0;flex:1}
+#menuStepMode .rule-option{display:flex;flex-direction:column;align-items:stretch;justify-content:space-between;gap:0;min-height:0;min-width:0;padding:22px;text-align:left;border:1px solid #3a424c;border-radius:12px;background:linear-gradient(150deg,#272d35,#1b2027);box-shadow:0 10px 30px #0002;overflow:hidden;transition:border-color .15s,background .15s}
+#menuStepMode .rule-option:hover{border-color:#8196a2;background:linear-gradient(150deg,#2c3540,#202730)}
+#menuStepMode .rule-option[aria-pressed="true"]{border-color:#64c9ea;background:linear-gradient(150deg,#263c49,#1b2934);box-shadow:inset 0 -3px #58c9ec,0 10px 30px #0002}
+#menuStepMode .mode-card-top{display:flex;align-items:center;justify-content:space-between;gap:8px;flex:none;color:#a1b5c6;font:9px/1.3 ui-monospace,monospace;letter-spacing:.12em;white-space:nowrap}
+#menuStepMode .choice-mark{display:grid;place-items:center;width:22px;height:22px;flex:none;border:1px solid #58616c;border-radius:50%;color:transparent;letter-spacing:0;font:700 12px system-ui}
+#menuStepMode [aria-pressed="true"] .choice-mark{background:#7ad8f3;border-color:#7ad8f3;color:#133441}
+#menuStepMode .mode-card-art{display:block;position:relative;flex:1;min-height:100px;max-height:235px;width:100%;margin:10px 0 12px}
+#menuStepMode .art-orbit{position:absolute;width:80%;max-width:240px;aspect-ratio:1;top:50%;left:50%;transform:translate(-50%,-50%);border:1px solid #8ab8ca22;border-radius:50%;background:radial-gradient(circle,#5891ae23,transparent 65%)}
+#menuStepMode .art-orbit:after{content:"";position:absolute;inset:15%;border:1px dashed #8ab8ca25;border-radius:50%}
+#menuStepMode .art-player{position:absolute;object-fit:cover;border-radius:50%;box-shadow:0 10px 22px #0007;top:50%;transform:translate(-50%,-50%);border:3px solid #728b99;width:30%;max-width:88px;aspect-ratio:1}
+#menuStepMode .art-player-left{left:20%;margin-top:16px;border-color:#7d91bc}
+#menuStepMode .art-player-right{left:80%;margin-top:16px;border-color:#c17c97}
+#menuStepMode .art-player-main{left:50%;width:42%;max-width:126px;z-index:1;border-color:#99def3}
+#menuStepMode .classic-art{display:grid;place-items:center}
+#menuStepMode .classic-art svg{display:block;width:100%;max-width:300px;max-height:100%;height:auto;filter:drop-shadow(0 10px 10px #0003)}
+#menuStepMode .mode-card-copy{display:flex;flex-direction:column;gap:10px;flex:none}
+#menuStepMode .mode-card-copy strong{font:750 clamp(19px,1.8vw,25px)/1.25 system-ui,"PingFang SC",sans-serif;letter-spacing:0;color:#f0f4f8}
+#menuStepMode .mode-card-copy small{display:block;font-size:12px;line-height:1.6;color:#a7b5c4;min-height:38px}
+#menuStepMode .mode-card-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:3px}
+#menuStepMode .mode-card-tags span{font-size:9px;line-height:1.4;border:1px solid #61718055;border-radius:4px;padding:4px 7px;color:#aabfce}
+#menuStepMode .opponent-panel{padding:24px;border:1px solid #363e48;border-radius:12px;background:#1d222a;align-self:stretch;justify-content:flex-start}
+#menuStepMode .mode-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+#menuStepMode .mode-option{padding:16px 12px;gap:6px;min-height:105px;border-color:#424e5c;border-radius:7px;background:#252d38}
+#menuStepMode .mode-option strong{font-size:14px;color:#e8edf3;letter-spacing:0}
+#menuStepMode .mode-option span{font-size:11px;color:#98abba}
+#menuStepMode .mode-option .opponent-icon{font:600 18px/1.1 ui-monospace,monospace;color:#829aaa;margin-bottom:8px}
+#menuStepMode .mode-option[aria-pressed="true"]{background:#203b49;border-color:#66c7e7;box-shadow:none}
+#menuStepMode .mode-option[aria-pressed="true"]:after{border-radius:50%;width:5px;height:5px;top:12px;right:12px}
+#menuStepMode .mode-option[aria-pressed="true"] .opponent-icon{color:#8ee1f9}
+#menuStepMode .difficulty-options{margin-top:26px;padding-top:23px;border-top:1px solid #39424c}
+#menuStepMode .difficulty-label{justify-content:space-between;gap:5px;margin-bottom:13px;font-size:12px}
+#menuStepMode .difficulty-label span{font-size:9px;color:#7f929f}
+#menuStepMode .difficulty-buttons{gap:7px}
+#menuStepMode .difficulty-option{min-height:67px;padding:10px 4px;gap:7px;border-radius:6px;border-color:#45505f;background:#262d38}
+#menuStepMode .difficulty-option strong{font-size:17px}
+#menuStepMode .difficulty-option span{font-size:10px;color:#97a7b8}
+#menuStepMode .difficulty-option[aria-pressed="true"]{border-color:#d47493;background:#422d3b;box-shadow:inset 0 -2px #e288a6}
+#menuStepMode .difficulty-option[aria-pressed="true"] span{color:#dab6c6}
+#menuStepMode #difficultyHelp{display:block;font-size:11px;line-height:1.7;color:#91a2b3;min-height:0;margin:15px 0 0}
+#menuStepMode .mode-step-footer{display:flex;align-items:center;justify-content:space-between;width:100%;max-width:none;gap:20px;margin:0;padding:20px 0 0;border-top:1px solid #3c444d}
+#menuStepMode .mode-step-footer p{display:flex;flex-direction:column;gap:5px;text-align:left;margin:0;font-size:12px;line-height:1.5;color:#8399a8}
+#menuStepMode .mode-step-footer p strong{font-size:13px;color:#c1ced8;font-weight:500}
+#menuStepMode .next-step-button{width:auto;min-width:270px;min-height:54px;padding:16px 24px;font-size:14px;border-radius:6px;letter-spacing:0;border-color:#73cce8;background:#66c9e9;color:#0f2f3d;box-shadow:none}
+#menuStepMode .next-step-button:hover{background:#9ce5fa}
+#menuStepMode button:focus-visible{outline:2px solid #c0eeff;outline-offset:4px}
+.overlay.is-menu .overlay-content[data-menu-step="mode"] .menu-actions{margin:14px 0 0;padding:0;border:0;background:transparent}
+.overlay.is-menu .overlay-content[data-menu-step="mode"] .resume-match{width:auto;min-height:32px;font-size:11px;padding:7px 14px;background:transparent;border-color:#556b79;border-radius:4px}
+@media(max-width:1000px){
+  .overlay.is-menu .overlay-content[data-menu-step="mode"]{padding:24px;max-height:820px}
+  #menuStepMode .match-setup{grid-template-columns:minmax(0,1.5fr) minmax(250px,1fr);gap:16px}
+  #menuStepMode .rule-options{gap:10px}
+  #menuStepMode .rule-option{padding:16px}
+  #menuStepMode .opponent-panel{padding:18px}
+  #menuStepMode .mode-card-copy strong{font-size:20px}
+  #menuStepMode .mode-card-top{font-size:8px;letter-spacing:.05em}
+  #menuStepMode .mode-card-copy small{font-size:11px}
+}
+@media(max-width:700px){
+  .overlay.is-menu .overlay-content[data-menu-step="mode"]{padding:18px;height:100dvh;max-height:860px}
+  .overlay.is-menu .overlay-content[data-menu-step="mode"] .menu-intro{margin-bottom:14px}
+  .overlay.is-menu .overlay-content[data-menu-step="mode"] h2{font-size:34px;margin:7px 0}
+  .overlay.is-menu .overlay-content[data-menu-step="mode"] #overlayText{font-size:11px}
+  .overlay-content[data-menu-step="mode"] .menu-progress{margin-bottom:14px;font-size:10px;gap:10px}
+  #menuStepMode{gap:14px;grid-template-rows:minmax(0,1fr) auto}
+  #menuStepMode .match-setup{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(180px,1fr) auto;gap:14px}
+  #menuStepMode .menu-label{font-size:12px;margin-bottom:9px}
+  #menuStepMode .rule-option{padding:12px;border-radius:8px}
+  #menuStepMode .choice-mark{width:18px;height:18px;font-size:10px}
+  #menuStepMode .mode-card-art{min-height:60px;max-height:130px;margin:4px 0 6px}
+  #menuStepMode .mode-card-copy{gap:5px}
+  #menuStepMode .mode-card-copy strong{font-size:18px}
+  #menuStepMode .mode-card-copy small{font-size:10px;line-height:1.5;min-height:30px}
+  #menuStepMode .mode-card-tags{display:none}
+  #menuStepMode .opponent-panel{padding:14px;border-radius:8px}
+  #menuStepMode .mode-options{gap:8px}
+  #menuStepMode .mode-option{position:relative;min-height:54px;padding:10px 12px;gap:4px}
+  #menuStepMode .mode-option strong{font-size:13px}
+  #menuStepMode .mode-option>span{font-size:10px}
+  #menuStepMode .mode-option .opponent-icon{display:none}
+  #menuStepMode .difficulty-options{margin-top:13px;padding-top:12px}
+  #menuStepMode .difficulty-label{font-size:11px;margin-bottom:9px}
+  #menuStepMode .difficulty-option{min-height:43px;flex-direction:row;gap:9px;padding:8px 4px}
+  #menuStepMode .difficulty-option strong{font-size:14px}
+  #menuStepMode .difficulty-option span{font-size:9px}
+  #menuStepMode #difficultyHelp{font-size:10px;line-height:1.4;margin-top:9px}
+  #menuStepMode .mode-step-footer{padding-top:13px;gap:12px;flex-direction:row;align-items:center}
+  #menuStepMode .mode-step-footer p strong{font-size:11px}
+  #menuStepMode .mode-step-footer p span{display:none}
+  #menuStepMode .next-step-button{min-width:0;min-height:44px;padding:12px 14px;font-size:12px;white-space:nowrap}
+}
+@media(max-height:700px) and (min-width:701px){
+  .overlay.is-menu .overlay-content[data-menu-step="mode"]{padding-top:16px;padding-bottom:16px}
+  .overlay.is-menu .overlay-content[data-menu-step="mode"] .menu-intro{margin-bottom:14px}
+  .overlay.is-menu .overlay-content[data-menu-step="mode"] h2{font-size:38px;margin:5px 0}
+  .overlay-content[data-menu-step="mode"] .menu-progress{margin-bottom:14px}
+  #menuStepMode{gap:16px}
+  #menuStepMode .rule-option{padding:16px}
+  #menuStepMode .mode-card-art{min-height:75px;margin:5px 0}
+  #menuStepMode .mode-card-copy{gap:6px}
+  #menuStepMode .mode-card-copy small{font-size:11px;min-height:34px}
+  #menuStepMode .mode-card-tags{display:none}
+  #menuStepMode .opponent-panel{padding:18px}
+  #menuStepMode .mode-option{min-height:82px;padding:12px 10px}
+  #menuStepMode .mode-option .opponent-icon{font-size:15px;margin:0}
+  #menuStepMode .difficulty-options{margin-top:16px;padding-top:16px}
+  #menuStepMode .difficulty-option{min-height:55px}
+  #menuStepMode #difficultyHelp{margin-top:10px}
+  #menuStepMode .mode-step-footer{padding-top:14px}
+  #menuStepMode .next-step-button{min-height:46px;padding:12px 20px}
+}
+@media(max-height:620px) and (max-width:700px){
+  .overlay.is-menu .overlay-content[data-menu-step="mode"]{padding:12px}
+  .overlay.is-menu .overlay-content[data-menu-step="mode"] .menu-intro{margin-bottom:9px}
+  .overlay.is-menu .overlay-content[data-menu-step="mode"] h2{font-size:28px;margin:0}
+  .overlay.is-menu .overlay-content[data-menu-step="mode"] .overlay-kicker,.overlay.is-menu .overlay-content[data-menu-step="mode"] #overlayText{display:none}
+  .overlay-content[data-menu-step="mode"] .menu-progress{margin-bottom:9px;font-size:9px}
+  #menuStepMode{gap:9px}
+  #menuStepMode .match-setup{grid-template-rows:minmax(155px,1fr) auto;gap:9px}
+  #menuStepMode .mode-card-top{font-size:7px}
+  #menuStepMode .mode-card-art{min-height:45px;max-height:85px;margin:2px 0 4px}
+  #menuStepMode .rule-option{padding:9px}
+  #menuStepMode .mode-card-copy strong{font-size:16px}
+  #menuStepMode .opponent-panel{padding:10px}
+  #menuStepMode .menu-label{margin-bottom:7px}
+  #menuStepMode .mode-option{min-height:48px;padding:8px 10px}
+  #menuStepMode .difficulty-options{margin-top:9px;padding-top:9px}
+  #menuStepMode .difficulty-option{min-height:37px}
+  #menuStepMode .mode-step-footer{padding-top:9px}
+  #menuStepMode .mode-step-footer p{display:none}
+  #menuStepMode .next-step-button{width:100%;min-height:40px;padding:10px 14px}
+}
+@media(max-height:620px) and (min-width:580px){
+  .overlay.is-menu .overlay-content[data-menu-step="mode"]{padding:12px 20px;height:100dvh}
+  .overlay.is-menu .overlay-content[data-menu-step="mode"] .menu-intro{margin:0 0 8px}
+  .overlay.is-menu .overlay-content[data-menu-step="mode"] h2{font-size:28px;margin:0}
+  .overlay.is-menu .overlay-content[data-menu-step="mode"] .overlay-kicker,.overlay.is-menu .overlay-content[data-menu-step="mode"] #overlayText{display:none}
+  .overlay-content[data-menu-step="mode"] .menu-progress{margin-bottom:9px;font-size:9px}
+  #menuStepMode{gap:10px}
+  #menuStepMode .match-setup{grid-template-columns:minmax(0,1.5fr) minmax(230px,1fr);grid-template-rows:minmax(0,1fr);gap:12px}
+  #menuStepMode .menu-label{font-size:10px;margin-bottom:8px}
+  #menuStepMode .rule-option{padding:10px}
+  #menuStepMode .mode-card-top{font-size:7px}
+  #menuStepMode .mode-card-art{min-height:35px;max-height:80px;margin:3px 0}
+  #menuStepMode .mode-card-copy{gap:3px}
+  #menuStepMode .mode-card-copy strong{font-size:15px}
+  #menuStepMode .mode-card-copy small{font-size:9px;line-height:1.4;min-height:26px}
+  #menuStepMode .mode-card-tags{display:none}
+  #menuStepMode .opponent-panel{padding:12px}
+  #menuStepMode .mode-option{min-height:47px;padding:8px;gap:3px}
+  #menuStepMode .mode-option strong{font-size:12px}
+  #menuStepMode .mode-option span{font-size:9px}
+  #menuStepMode .mode-option .opponent-icon{display:none}
+  #menuStepMode .difficulty-options{margin-top:10px;padding-top:10px}
+  #menuStepMode .difficulty-label{font-size:10px;margin-bottom:7px}
+  #menuStepMode .difficulty-option{min-height:37px;flex-direction:row;padding:5px;gap:5px}
+  #menuStepMode .difficulty-option strong{font-size:13px}
+  #menuStepMode .difficulty-option span{font-size:8px}
+  #menuStepMode #difficultyHelp{display:none}
+  #menuStepMode .mode-step-footer{padding-top:10px;flex-direction:row}
+  #menuStepMode .mode-step-footer p{display:block}
+  #menuStepMode .mode-step-footer p strong{font-size:10px}
+  #menuStepMode .mode-step-footer p span{display:none}
+  #menuStepMode .next-step-button{width:auto;min-width:220px;min-height:36px;padding:9px 14px;font-size:11px}
+}
+/* Very short windows keep the action visible; only the choices may scroll. */
+@media(max-height:620px), (max-height:740px) and (max-width:700px){
+  #menuStepMode .match-setup{overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#587584 transparent}
+  #menuStepMode .setup-block,#menuStepMode .rule-option{min-height:min-content}
+  #menuStepMode .match-setup button:focus-visible{outline-offset:-4px}
+}

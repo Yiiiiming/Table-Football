@@ -175,7 +175,7 @@
       $('draftSettingsSummary').textContent = (chosen.variant === 'classic' ? '经典模式' : '球员大乱斗') + ' · ' + (chosen.mode === 'multi' ? '同屏双人' : ({low:'低',medium:'中',high:'高'}[chosen.difficulty] || '中') + '档 AI');
       $('draftNext').textContent = '下一步 · ' + (chosen.variant === 'classic' ? '选择阵型 →' : '调整阵容 →');
       $('overlayKicker').textContent = isMode ? 'CHOOSE YOUR MATCH.' : 'BUILD YOUR STARTING FIVE.';
-      $('overlayTitle').textContent = isMode ? 'YOUR MATCH. YOUR RULES.' : chosen.variant === 'classic' ? 'SET YOUR FORMATION.' : 'BUILD YOUR FIVE.';
+      $('overlayTitle').textContent = isMode ? 'YOUR MATCH.' : chosen.variant === 'classic' ? 'SET YOUR FORMATION.' : 'BUILD YOUR FIVE.';
       $('overlayText').textContent = isMode ? '先选玩法与对手，下一步再排兵布阵。' : chosen.variant === 'classic' ? '为两队选择开场阵型，然后开始比赛。' : '左侧安排站位，右侧选择球员；每队五人，自由搭配。';
       $('draftBack').hidden = isMode;
       rosterElement.hidden = false;
