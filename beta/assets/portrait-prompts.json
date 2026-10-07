@@ -1,0 +1,193 @@
+{
+  "schemaVersion": 1,
+  "toolMode": "built-in image_gen",
+  "generationIntent": "11 distinct individual sports-game cartoon portraits",
+  "notes": [
+    "All final files are original imagegen PNG outputs; no raster processing or optimization was applied.",
+    "The user confirmed having relevant likeness authorization for the 9 requested real-person portraits.",
+    "Only abluo and meixi use approved wholly fictional replacements after the original named requests were blocked.",
+    "Four initial portraits were restyled through the built-in image editing tool for clearer cartoon rendering. Their originals are preserved outside the public assets directory."
+  ],
+  "assets": [
+    {
+      "id": "suya",
+      "file": "players/suya.png",
+      "subject": "Luis Suarez",
+      "toolMode": "built-in image_gen",
+      "status": "complete",
+      "visuallyInspected": true,
+      "attempts": [
+        {
+          "mode": "generate",
+          "prompt": "Use case: stylized-concept\nAsset type: one individual player avatar for a playful parody football video game. Square 1:1 image, 1024x1024.\nPrimary request: a recognizable head-and-shoulders cartoon caricature of the ADULT real footballer named below. A friendly sports portrait, with mild playful exaggeration of distinctive facial features; respectful and clearly illustrated.\nScene/backdrop: clean dark charcoal studio backdrop (#19191c), soft subtle vignette, no scenery.\nStyle/medium: polished painterly 3D-cel illustration, sculpted soft volumetric face, crisp expressive shapes, warm natural skin colors, restrained brush texture, high-quality modern sports-game character art. Cohesive game-avatar style, neither photorealistic nor flat vector.\nComposition/framing: one centered person, facing almost front with a subtle three-quarter turn, looking at the viewer. Close head and shoulders; entire hair/head within image, modest safe margin above and on both sides. Face occupies most of the square and stays readable at small thumbnail size. Plain black unbranded crew-neck athletic jersey.\nLighting/mood: soft studio key light showing the facial likeness clearly, subtle cyan rim light on the left and magenta rim light on the right. Friendly, determined neutral expression.\nConstraints: exactly one adult person; no ball or extra objects, no letters, text, numbers, brand marks, team logos, watermarks, or border; no action scene, no violent skills, no aggressive gesture.\nSubject: Recognizable adult Luis Suarez: short thick dark hair, broad strong eyebrows, warm olive complexion, full cheeks, characteristic broad mouth and prominent front teeth in a small friendly smile, light stubble."
+        },
+        {
+          "mode": "edit",
+          "prompt": "Use case: style-transfer\nInput image: edit target, a generated portrait of an adult football player.\nPrimary request: redraw this portrait as an unmistakably CARTOON 3D sports-game character bust. Keep the same recognizable adult person, distinctive facial proportions, hairstyle, skin tone, friendly determined expression, head-and-shoulder framing, plain black jersey, charcoal background, cyan left rim and magenta right rim.\nChange only the rendering style and gently exaggerate the existing facial character: slightly oversized head, noticeably enlarged expressive cartoon eyes, simplified bold facial planes, chunky sculpted locks of hair and simplified beard shapes. Use polished painterly cel shading with broad clean color planes and playful stylized contours, like a high-end animated-game portrait. Remove photographic skin pores and lifelike fine texture. The result must read as an animated cartoon illustration at first glance, not a photo.\nComposition: square 1:1, entire head and hair inside the frame, close head-and-shoulders, no extra objects, no frame.\nConstraints: no letters, text, numbers, branding, team logos, watermark, violent gesture, or added props. Preserve the single adult subject and underlying identity."
+        }
+      ]
+    },
+    {
+      "id": "abluo",
+      "file": "players/abluo.png",
+      "subject": "Original fictional adult football player",
+      "originalRequestedSubject": "Cristiano Ronaldo",
+      "substitution": {
+        "reason": "Original requested likeness blocked by image tool safety system.",
+        "userApproved": "User approved replacing only affected portraits with original fictional characters."
+      },
+      "toolMode": "built-in image_gen",
+      "status": "complete",
+      "visuallyInspected": true,
+      "attempts": [
+        {
+          "mode": "generate",
+          "prompt": "Use case: stylized-concept\nAsset type: one individual player avatar for a playful parody football video game. Square 1:1 image, 1024x1024.\nPrimary request: one entirely original fictional ADULT footballer cartoon avatar. Playful sports portrait with a friendly determined expression. Do not depict any real person or recognizable celebrity likeness.\nScene/backdrop: clean dark charcoal studio backdrop (#19191c), soft subtle vignette, no scenery.\nStyle/medium: OBVIOUSLY CARTOON, not a photograph: a polished painterly 3D cartoon character bust, a slightly oversized head, large expressive eyes, simplified bold geometric facial planes, chunky sculpted locks of hair, smooth handpainted cel shading, no skin pores, no individual photorealistic hairs. Playful mild caricature with strong recognizable facial shapes. High-quality modern sports-game cartoon art. Clearly stylized and illustrated at first glance.\nComposition/framing: one centered person, facing almost front with a subtle three-quarter turn, looking at the viewer. Close head and shoulders; entire hair/head within image, modest safe margin above and on both sides. Face occupies most of the square and stays readable at small thumbnail size. Plain black unbranded crew-neck athletic jersey.\nLighting/mood: soft studio key light showing the facial likeness clearly, subtle cyan rim light on the left and magenta rim light on the right. Friendly, determined neutral expression.\nConstraints: exactly one adult person; no ball or extra objects, no letters, text, numbers, brand marks, team logos, watermarks, or border; no action scene, no violent skills, no aggressive gesture.\nSubject: An entirely original fictional adult football player, with a rounded friendly face, sandy-brown wavy hair in a relaxed uneven crop, a soft dimpled chin and a small neat auburn moustache. Wholly invented face and identity, not a portrait or lookalike of any existing person. Confident welcoming expression."
+        }
+      ]
+    },
+    {
+      "id": "meixi",
+      "file": "players/meixi.png",
+      "subject": "Original fictional adult football player",
+      "originalRequestedSubject": "Lionel Messi",
+      "substitution": {
+        "reason": "Original requested likeness blocked by image tool safety system.",
+        "userApproved": "User approved replacing only affected portraits with original fictional characters."
+      },
+      "toolMode": "built-in image_gen",
+      "status": "complete",
+      "visuallyInspected": true,
+      "attempts": [
+        {
+          "mode": "generate",
+          "prompt": "Use case: stylized-concept\nAsset type: one individual player avatar for a playful parody football video game. Square 1:1 image, 1024x1024.\nPrimary request: one entirely original fictional ADULT footballer cartoon avatar. Playful sports portrait with a friendly determined expression. Do not depict any real person or recognizable celebrity likeness.\nScene/backdrop: clean dark charcoal studio backdrop (#19191c), soft subtle vignette, no scenery.\nStyle/medium: OBVIOUSLY CARTOON, not a photograph: a polished painterly 3D cartoon character bust, a slightly oversized head, large expressive eyes, simplified bold geometric facial planes, chunky sculpted locks of hair, smooth handpainted cel shading, no skin pores, no individual photorealistic hairs. Playful mild caricature with strong recognizable facial shapes. High-quality modern sports-game cartoon art. Clearly stylized and illustrated at first glance.\nComposition/framing: one centered person, facing almost front with a subtle three-quarter turn, looking at the viewer. Close head and shoulders; entire hair/head within image, modest safe margin above and on both sides. Face occupies most of the square and stays readable at small thumbnail size. Plain black unbranded crew-neck athletic jersey.\nLighting/mood: soft studio key light showing the facial likeness clearly, subtle cyan rim light on the left and magenta rim light on the right. Friendly, determined neutral expression.\nConstraints: exactly one adult person; no ball or extra objects, no letters, text, numbers, brand marks, team logos, watermarks, or border; no action scene, no violent skills, no aggressive gesture.\nSubject: An entirely original fictional adult football player, with copper-brown skin, a long narrow face, a short black coiled flat-top haircut, clean-shaven jaw, broad friendly nose and large lively eyes. Wholly invented face and identity, not a portrait or lookalike of any existing person. Calm focused expression."
+        }
+      ]
+    },
+    {
+      "id": "haaland",
+      "file": "players/haaland.png",
+      "subject": "Erling Haaland",
+      "toolMode": "built-in image_gen",
+      "status": "complete",
+      "visuallyInspected": true,
+      "attempts": [
+        {
+          "mode": "generate",
+          "prompt": "Use case: stylized-concept\nAsset type: one individual player avatar for a playful parody football video game. Square 1:1 image, 1024x1024.\nPrimary request: a recognizable head-and-shoulders cartoon caricature of the ADULT real footballer named below. A friendly sports portrait, with mild playful exaggeration of distinctive facial features; respectful and clearly illustrated.\nScene/backdrop: clean dark charcoal studio backdrop (#19191c), soft subtle vignette, no scenery.\nStyle/medium: polished painterly 3D-cel illustration, sculpted soft volumetric face, crisp expressive shapes, warm natural skin colors, restrained brush texture, high-quality modern sports-game character art. Cohesive game-avatar style, neither photorealistic nor flat vector.\nComposition/framing: one centered person, facing almost front with a subtle three-quarter turn, looking at the viewer. Close head and shoulders; entire hair/head within image, modest safe margin above and on both sides. Face occupies most of the square and stays readable at small thumbnail size. Plain black unbranded crew-neck athletic jersey.\nLighting/mood: soft studio key light showing the facial likeness clearly, subtle cyan rim light on the left and magenta rim light on the right. Friendly, determined neutral expression.\nConstraints: exactly one adult person; no ball or extra objects, no letters, text, numbers, brand marks, team logos, watermarks, or border; no action scene, no violent skills, no aggressive gesture.\nSubject: Recognizable adult Erling Haaland: long pale blond hair slicked back into a short tied tail, fair skin, broad strong face, pale eyebrows, clean-shaven, powerful cheekbones and an understated determined expression."
+        },
+        {
+          "mode": "edit",
+          "prompt": "Use case: style-transfer\nInput image: edit target, a generated portrait of an adult football player.\nPrimary request: redraw this portrait as an unmistakably CARTOON 3D sports-game character bust. Keep the same recognizable adult person, distinctive facial proportions, hairstyle, skin tone, friendly determined expression, head-and-shoulder framing, plain black jersey, charcoal background, cyan left rim and magenta right rim.\nChange only the rendering style and gently exaggerate the existing facial character: slightly oversized head, noticeably enlarged expressive cartoon eyes, simplified bold facial planes, chunky sculpted locks of hair and simplified beard shapes. Use polished painterly cel shading with broad clean color planes and playful stylized contours, like a high-end animated-game portrait. Remove photographic skin pores and lifelike fine texture. The result must read as an animated cartoon illustration at first glance, not a photo.\nComposition: square 1:1, entire head and hair inside the frame, close head-and-shoulders, no extra objects, no frame.\nConstraints: no letters, text, numbers, branding, team logos, watermark, violent gesture, or added props. Preserve the single adult subject and underlying identity."
+        }
+      ]
+    },
+    {
+      "id": "modi",
+      "file": "players/modi.png",
+      "subject": "Luka Modric",
+      "toolMode": "built-in image_gen",
+      "status": "complete",
+      "visuallyInspected": true,
+      "attempts": [
+        {
+          "mode": "generate",
+          "prompt": "Use case: stylized-concept\nAsset type: one individual player avatar for a playful parody football video game. Square 1:1 image, 1024x1024.\nPrimary request: a recognizable head-and-shoulders cartoon caricature of the ADULT real footballer named below. A friendly sports portrait, with mild playful exaggeration of distinctive facial features; respectful and clearly illustrated.\nScene/backdrop: clean dark charcoal studio backdrop (#19191c), soft subtle vignette, no scenery.\nStyle/medium: polished painterly 3D-cel illustration, sculpted soft volumetric face, crisp expressive shapes, warm natural skin colors, restrained brush texture, high-quality modern sports-game character art. Cohesive game-avatar style, neither photorealistic nor flat vector.\nComposition/framing: one centered person, facing almost front with a subtle three-quarter turn, looking at the viewer. Close head and shoulders; entire hair/head within image, modest safe margin above and on both sides. Face occupies most of the square and stays readable at small thumbnail size. Plain black unbranded crew-neck athletic jersey.\nLighting/mood: soft studio key light showing the facial likeness clearly, subtle cyan rim light on the left and magenta rim light on the right. Friendly, determined neutral expression.\nConstraints: exactly one adult person; no ball or extra objects, no letters, text, numbers, brand marks, team logos, watermarks, or border; no action scene, no violent skills, no aggressive gesture.\nSubject: Recognizable adult Luka Modric: medium-length light brown hair parted near the middle and tucked behind the ears, narrow angular face, high cheekbones, long refined nose, light stubble, calm intelligent eyes."
+        },
+        {
+          "mode": "edit",
+          "prompt": "Use case: style-transfer\nInput image: edit target, a generated portrait of an adult football player.\nPrimary request: redraw this portrait as an unmistakably CARTOON 3D sports-game character bust. Keep the same recognizable adult person, distinctive facial proportions, hairstyle, skin tone, friendly determined expression, head-and-shoulder framing, plain black jersey, charcoal background, cyan left rim and magenta right rim.\nChange only the rendering style and gently exaggerate the existing facial character: slightly oversized head, noticeably enlarged expressive cartoon eyes, simplified bold facial planes, chunky sculpted locks of hair and simplified beard shapes. Use polished painterly cel shading with broad clean color planes and playful stylized contours, like a high-end animated-game portrait. Remove photographic skin pores and lifelike fine texture. The result must read as an animated cartoon illustration at first glance, not a photo.\nComposition: square 1:1, entire head and hair inside the frame, close head-and-shoulders, no extra objects, no frame.\nConstraints: no letters, text, numbers, branding, team logos, watermark, violent gesture, or added props. Preserve the single adult subject and underlying identity."
+        }
+      ]
+    },
+    {
+      "id": "dingding",
+      "file": "players/dingding.png",
+      "subject": "Kevin De Bruyne",
+      "toolMode": "built-in image_gen",
+      "status": "complete",
+      "visuallyInspected": true,
+      "attempts": [
+        {
+          "mode": "generate",
+          "prompt": "Use case: stylized-concept\nAsset type: one individual player avatar for a playful parody football video game. Square 1:1 image, 1024x1024.\nPrimary request: a recognizable head-and-shoulders cartoon caricature of the ADULT real footballer named below. A friendly sports portrait, with mild playful exaggeration of distinctive facial features; respectful and clearly illustrated.\nScene/backdrop: clean dark charcoal studio backdrop (#19191c), soft subtle vignette, no scenery.\nStyle/medium: polished painterly 3D-cel illustration, sculpted soft volumetric face, crisp expressive shapes, warm natural skin colors, restrained brush texture, high-quality modern sports-game character art. Cohesive game-avatar style, neither photorealistic nor flat vector.\nComposition/framing: one centered person, facing almost front with a subtle three-quarter turn, looking at the viewer. Close head and shoulders; entire hair/head within image, modest safe margin above and on both sides. Face occupies most of the square and stays readable at small thumbnail size. Plain black unbranded crew-neck athletic jersey.\nLighting/mood: soft studio key light showing the facial likeness clearly, subtle cyan rim light on the left and magenta rim light on the right. Friendly, determined neutral expression.\nConstraints: exactly one adult person; no ball or extra objects, no letters, text, numbers, brand marks, team logos, watermarks, or border; no action scene, no violent skills, no aggressive gesture.\nSubject: Recognizable adult Kevin De Bruyne: short tousled ginger-blond hair, very fair complexion, light reddish facial stubble, pale blue eyes, broad face, focused but approachable expression."
+        },
+        {
+          "mode": "edit",
+          "prompt": "Use case: style-transfer\nInput image: edit target, a generated portrait of an adult football player.\nPrimary request: redraw this portrait as an unmistakably CARTOON 3D sports-game character bust. Keep the same recognizable adult person, distinctive facial proportions, hairstyle, skin tone, friendly determined expression, head-and-shoulder framing, plain black jersey, charcoal background, cyan left rim and magenta right rim.\nChange only the rendering style and gently exaggerate the existing facial character: slightly oversized head, noticeably enlarged expressive cartoon eyes, simplified bold facial planes, chunky sculpted locks of hair and simplified beard shapes. Use polished painterly cel shading with broad clean color planes and playful stylized contours, like a high-end animated-game portrait. Remove photographic skin pores and lifelike fine texture. The result must read as an animated cartoon illustration at first glance, not a photo.\nComposition: square 1:1, entire head and hair inside the frame, close head-and-shoulders, no extra objects, no frame.\nConstraints: no letters, text, numbers, branding, team logos, watermark, violent gesture, or added props. Preserve the single adult subject and underlying identity."
+        }
+      ]
+    },
+    {
+      "id": "kante",
+      "file": "players/kante.png",
+      "subject": "N'Golo Kante",
+      "toolMode": "built-in image_gen",
+      "status": "complete",
+      "visuallyInspected": true,
+      "attempts": [
+        {
+          "mode": "generate",
+          "prompt": "Use case: stylized-concept\nAsset type: one individual player avatar for a playful parody football video game. Square 1:1 image, 1024x1024.\nPrimary request: a recognizable head-and-shoulders cartoon caricature of the ADULT real footballer named below. A friendly sports portrait, with mild playful exaggeration of distinctive facial features; respectful and clearly illustrated.\nScene/backdrop: clean dark charcoal studio backdrop (#19191c), soft subtle vignette, no scenery.\nStyle/medium: OBVIOUSLY CARTOON, not a photograph: a polished painterly 3D cartoon character bust, a slightly oversized head, large expressive eyes, simplified bold geometric facial planes, chunky sculpted locks of hair, smooth handpainted cel shading, no skin pores, no individual photorealistic hairs. Playful mild caricature with strong recognizable facial shapes. High-quality modern sports-game cartoon art. Clearly stylized and illustrated at first glance.\nComposition/framing: one centered person, facing almost front with a subtle three-quarter turn, looking at the viewer. Close head and shoulders; entire hair/head within image, modest safe margin above and on both sides. Face occupies most of the square and stays readable at small thumbnail size. Plain black unbranded crew-neck athletic jersey.\nLighting/mood: soft studio key light showing the facial likeness clearly, subtle cyan rim light on the left and magenta rim light on the right. Friendly, determined neutral expression.\nConstraints: exactly one adult person; no ball or extra objects, no letters, text, numbers, brand marks, team logos, watermarks, or border; no action scene, no violent skills, no aggressive gesture.\nSubject: Recognizable adult N'Golo Kante: deep brown skin, very closely shaved black hair, rounded head, broad nose, small warm smile, distinctive ears, friendly determined eyes."
+        }
+      ]
+    },
+    {
+      "id": "beilin",
+      "file": "players/beilin.png",
+      "subject": "Jude Bellingham",
+      "toolMode": "built-in image_gen",
+      "status": "complete",
+      "visuallyInspected": true,
+      "attempts": [
+        {
+          "mode": "generate",
+          "prompt": "Use case: stylized-concept\nAsset type: one individual player avatar for a playful parody football video game. Square 1:1 image, 1024x1024.\nPrimary request: a recognizable head-and-shoulders cartoon caricature of the ADULT real footballer named below. A friendly sports portrait, with mild playful exaggeration of distinctive facial features; respectful and clearly illustrated.\nScene/backdrop: clean dark charcoal studio backdrop (#19191c), soft subtle vignette, no scenery.\nStyle/medium: OBVIOUSLY CARTOON, not a photograph: a polished painterly 3D cartoon character bust, a slightly oversized head, large expressive eyes, simplified bold geometric facial planes, chunky sculpted locks of hair, smooth handpainted cel shading, no skin pores, no individual photorealistic hairs. Playful mild caricature with strong recognizable facial shapes. High-quality modern sports-game cartoon art. Clearly stylized and illustrated at first glance.\nComposition/framing: one centered person, facing almost front with a subtle three-quarter turn, looking at the viewer. Close head and shoulders; entire hair/head within image, modest safe margin above and on both sides. Face occupies most of the square and stays readable at small thumbnail size. Plain black unbranded crew-neck athletic jersey.\nLighting/mood: soft studio key light showing the facial likeness clearly, subtle cyan rim light on the left and magenta rim light on the right. Friendly, determined neutral expression.\nConstraints: exactly one adult person; no ball or extra objects, no letters, text, numbers, brand marks, team logos, watermarks, or border; no action scene, no violent skills, no aggressive gesture.\nSubject: Recognizable ADULT Jude Bellingham: warm medium-brown complexion, short tight textured dark curls with a neat tapered fade, defined eyebrows, angular cheekbones, subtle neat moustache and chin stubble, poised confident expression."
+        }
+      ]
+    },
+    {
+      "id": "qizu",
+      "file": "players/qizu.png",
+      "subject": "Zinedine Zidane",
+      "toolMode": "built-in image_gen",
+      "status": "complete",
+      "visuallyInspected": true,
+      "attempts": [
+        {
+          "mode": "generate",
+          "prompt": "Use case: stylized-concept\nAsset type: one individual player avatar for a playful parody football video game. Square 1:1 image, 1024x1024.\nPrimary request: a recognizable head-and-shoulders cartoon caricature of the ADULT real footballer named below. A friendly sports portrait, with mild playful exaggeration of distinctive facial features; respectful and clearly illustrated.\nScene/backdrop: clean dark charcoal studio backdrop (#19191c), soft subtle vignette, no scenery.\nStyle/medium: OBVIOUSLY CARTOON, not a photograph: a polished painterly 3D cartoon character bust, a slightly oversized head, large expressive eyes, simplified bold geometric facial planes, chunky sculpted locks of hair, smooth handpainted cel shading, no skin pores, no individual photorealistic hairs. Playful mild caricature with strong recognizable facial shapes. High-quality modern sports-game cartoon art. Clearly stylized and illustrated at first glance.\nComposition/framing: one centered person, facing almost front with a subtle three-quarter turn, looking at the viewer. Close head and shoulders; entire hair/head within image, modest safe margin above and on both sides. Face occupies most of the square and stays readable at small thumbnail size. Plain black unbranded crew-neck athletic jersey.\nLighting/mood: soft studio key light showing the facial likeness clearly, subtle cyan rim light on the left and magenta rim light on the right. Friendly, determined neutral expression.\nConstraints: exactly one adult person; no ball or extra objects, no letters, text, numbers, brand marks, team logos, watermarks, or border; no action scene, no violent skills, no aggressive gesture.\nSubject: Recognizable adult Zinedine Zidane: bald head with extremely short stubble at the sides, light olive skin, strong dark eyebrows, elongated face, prominent refined nose, short salt-and-pepper beard stubble, composed expression."
+        }
+      ]
+    },
+    {
+      "id": "shuiye",
+      "file": "players/shuiye.png",
+      "subject": "Sergio Ramos",
+      "toolMode": "built-in image_gen",
+      "status": "complete",
+      "visuallyInspected": true,
+      "attempts": [
+        {
+          "mode": "generate",
+          "prompt": "Use case: stylized-concept\nAsset type: one individual player avatar for a playful parody football video game. Square 1:1 image, 1024x1024.\nPrimary request: a recognizable head-and-shoulders cartoon caricature of the ADULT real footballer named below. A friendly sports portrait, with mild playful exaggeration of distinctive facial features; respectful and clearly illustrated.\nScene/backdrop: clean dark charcoal studio backdrop (#19191c), soft subtle vignette, no scenery.\nStyle/medium: OBVIOUSLY CARTOON, not a photograph: a polished painterly 3D cartoon character bust, a slightly oversized head, large expressive eyes, simplified bold geometric facial planes, chunky sculpted locks of hair, smooth handpainted cel shading, no skin pores, no individual photorealistic hairs. Playful mild caricature with strong recognizable facial shapes. High-quality modern sports-game cartoon art. Clearly stylized and illustrated at first glance.\nComposition/framing: one centered person, facing almost front with a subtle three-quarter turn, looking at the viewer. Close head and shoulders; entire hair/head within image, modest safe margin above and on both sides. Face occupies most of the square and stays readable at small thumbnail size. Plain black unbranded crew-neck athletic jersey.\nLighting/mood: soft studio key light showing the facial likeness clearly, subtle cyan rim light on the left and magenta rim light on the right. Friendly, determined neutral expression.\nConstraints: exactly one adult person; no ball or extra objects, no letters, text, numbers, brand marks, team logos, watermarks, or border; no action scene, no violent skills, no aggressive gesture.\nSubject: Recognizable adult Sergio Ramos: medium brown hair swept and slicked back, full neatly groomed brown beard, strong angular jaw, light olive skin, expressive brown eyes, slightly rugged friendly determined expression."
+        }
+      ]
+    },
+    {
+      "id": "fandui",
+      "file": "players/fandui.png",
+      "subject": "Virgil van Dijk",
+      "toolMode": "built-in image_gen",
+      "status": "complete",
+      "visuallyInspected": true,
+      "attempts": [
+        {
+          "mode": "generate",
+          "prompt": "Use case: stylized-concept\nAsset type: one individual player avatar for a playful parody football video game. Square 1:1 image, 1024x1024.\nPrimary request: a recognizable head-and-shoulders cartoon caricature of the ADULT real footballer named below. A friendly sports portrait, with mild playful exaggeration of distinctive facial features; respectful and clearly illustrated.\nScene/backdrop: clean dark charcoal studio backdrop (#19191c), soft subtle vignette, no scenery.\nStyle/medium: OBVIOUSLY CARTOON, not a photograph: a polished painterly 3D cartoon character bust, a slightly oversized head, large expressive eyes, simplified bold geometric facial planes, chunky sculpted locks of hair, smooth handpainted cel shading, no skin pores, no individual photorealistic hairs. Playful mild caricature with strong recognizable facial shapes. High-quality modern sports-game cartoon art. Clearly stylized and illustrated at first glance.\nComposition/framing: one centered person, facing almost front with a subtle three-quarter turn, looking at the viewer. Close head and shoulders; entire hair/head within image, modest safe margin above and on both sides. Face occupies most of the square and stays readable at small thumbnail size. Plain black unbranded crew-neck athletic jersey.\nLighting/mood: soft studio key light showing the facial likeness clearly, subtle cyan rim light on the left and magenta rim light on the right. Friendly, determined neutral expression.\nConstraints: exactly one adult person; no ball or extra objects, no letters, text, numbers, brand marks, team logos, watermarks, or border; no action scene, no violent skills, no aggressive gesture.\nSubject: Recognizable adult Virgil van Dijk: medium-brown complexion, dark hair slicked back into a neat small bun, long strong face, broad nose, trimmed moustache and small chin beard, calm assured expression."
+        }
+      ]
+    }
+  ]
+}

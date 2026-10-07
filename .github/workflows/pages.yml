@@ -27,11 +27,16 @@ jobs:
           node --check ai.js
           node --check game.js
           node --test tests/*.test.cjs
+          for file in beta/*.js; do node --check "$file"; done
+          node --test beta/tests/*.test.cjs
       - name: Prepare website
         run: |
           mkdir _site
           cp index.html style.css physics.js ai.js game.js .nojekyll _site/
           cp -R assets _site/assets
+          mkdir -p _site/beta
+          cp beta/index.html beta/*.css beta/*.js _site/beta/
+          cp -R beta/assets _site/beta/assets
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
         with:

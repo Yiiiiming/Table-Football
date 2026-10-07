@@ -68,3 +68,5 @@
   .toolbar-actions{width:100%;justify-content:space-between;gap:4px}
   .toolbar-actions button{padding:7px 6px;font-size:10px}
 }
+
+.beta-entry{color:#7ed9fc;text-decoration:none;font-size:12px;letter-spacing:.03em}.beta-entry:hover{text-decoration:underline}

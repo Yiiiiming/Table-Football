@@ -1,0 +1,382 @@
+{
+  "note": "Bounded deterministic medium-AI sample; not a statistical balance guarantee. Same seeds are paired with swapped lineups.",
+  "preset": "swap-midfield",
+  "lineups": [
+    [
+      "fandui",
+      "beilin",
+      "modi",
+      "meixi",
+      "abluo"
+    ],
+    [
+      "shuiye",
+      "kante",
+      "dingding",
+      "haaland",
+      "suya"
+    ]
+  ],
+  "summary": {
+    "matches": 12,
+    "completed": 12,
+    "capped": 0,
+    "lineupWins": {
+      "A": 11,
+      "B": 1
+    },
+    "sideWins": [
+      7,
+      5
+    ],
+    "goals": 41,
+    "meanTurns": 23.25,
+    "meanShots": 23.416666666666668,
+    "bonusShots": 2,
+    "timedOutShots": 0,
+    "events": {
+      "removal": 0,
+      "injury": 0,
+      "shield": 0,
+      "charge": 29,
+      "bonus": 2,
+      "teleport": 3,
+      "armed": 12,
+      "boost": 11,
+      "mass": 2
+    }
+  },
+  "results": [
+    {
+      "seed": 20261006,
+      "swapped": false,
+      "preset": "swap-midfield",
+      "mode": "brawl",
+      "scores": [
+        3,
+        0
+      ],
+      "turns": 17,
+      "shots": 17,
+      "bonusShots": 0,
+      "winner": 0,
+      "winningLineup": "A",
+      "capped": false,
+      "timedOutShots": 0,
+      "remaining": [
+        5,
+        5
+      ],
+      "events": {
+        "charge": 1
+      },
+      "elapsedMs": 710
+    },
+    {
+      "seed": 20261006,
+      "swapped": true,
+      "preset": "swap-midfield",
+      "mode": "brawl",
+      "scores": [
+        0,
+        3
+      ],
+      "turns": 18,
+      "shots": 18,
+      "bonusShots": 0,
+      "winner": 1,
+      "winningLineup": "A",
+      "capped": false,
+      "timedOutShots": 0,
+      "remaining": [
+        5,
+        5
+      ],
+      "events": {
+        "charge": 1
+      },
+      "elapsedMs": 733
+    },
+    {
+      "seed": 20261739,
+      "swapped": false,
+      "preset": "swap-midfield",
+      "mode": "brawl",
+      "scores": [
+        3,
+        1
+      ],
+      "turns": 23,
+      "shots": 24,
+      "bonusShots": 1,
+      "winner": 0,
+      "winningLineup": "A",
+      "capped": false,
+      "timedOutShots": 0,
+      "remaining": [
+        5,
+        5
+      ],
+      "events": {
+        "charge": 2,
+        "bonus": 1,
+        "teleport": 1
+      },
+      "elapsedMs": 927
+    },
+    {
+      "seed": 20261739,
+      "swapped": true,
+      "preset": "swap-midfield",
+      "mode": "brawl",
+      "scores": [
+        1,
+        3
+      ],
+      "turns": 30,
+      "shots": 30,
+      "bonusShots": 0,
+      "winner": 1,
+      "winningLineup": "A",
+      "capped": false,
+      "timedOutShots": 0,
+      "remaining": [
+        5,
+        5
+      ],
+      "events": {
+        "charge": 2,
+        "armed": 2,
+        "boost": 2
+      },
+      "elapsedMs": 1262
+    },
+    {
+      "seed": 20262472,
+      "swapped": false,
+      "preset": "swap-midfield",
+      "mode": "brawl",
+      "scores": [
+        3,
+        0
+      ],
+      "turns": 15,
+      "shots": 16,
+      "bonusShots": 1,
+      "winner": 0,
+      "winningLineup": "A",
+      "capped": false,
+      "timedOutShots": 0,
+      "remaining": [
+        5,
+        5
+      ],
+      "events": {
+        "charge": 6,
+        "bonus": 1
+      },
+      "elapsedMs": 632
+    },
+    {
+      "seed": 20262472,
+      "swapped": true,
+      "preset": "swap-midfield",
+      "mode": "brawl",
+      "scores": [
+        3,
+        0
+      ],
+      "turns": 29,
+      "shots": 29,
+      "bonusShots": 0,
+      "winner": 0,
+      "winningLineup": "B",
+      "capped": false,
+      "timedOutShots": 0,
+      "remaining": [
+        5,
+        5
+      ],
+      "events": {
+        "armed": 4,
+        "boost": 4,
+        "charge": 4,
+        "mass": 1
+      },
+      "elapsedMs": 1302
+    },
+    {
+      "seed": 20263205,
+      "swapped": false,
+      "preset": "swap-midfield",
+      "mode": "brawl",
+      "scores": [
+        3,
+        0
+      ],
+      "turns": 17,
+      "shots": 17,
+      "bonusShots": 0,
+      "winner": 0,
+      "winningLineup": "A",
+      "capped": false,
+      "timedOutShots": 0,
+      "remaining": [
+        5,
+        5
+      ],
+      "events": {
+        "charge": 3
+      },
+      "elapsedMs": 678
+    },
+    {
+      "seed": 20263205,
+      "swapped": true,
+      "preset": "swap-midfield",
+      "mode": "brawl",
+      "scores": [
+        0,
+        3
+      ],
+      "turns": 18,
+      "shots": 18,
+      "bonusShots": 0,
+      "winner": 1,
+      "winningLineup": "A",
+      "capped": false,
+      "timedOutShots": 0,
+      "remaining": [
+        5,
+        5
+      ],
+      "events": {
+        "charge": 3
+      },
+      "elapsedMs": 728
+    },
+    {
+      "seed": 20263938,
+      "swapped": false,
+      "preset": "swap-midfield",
+      "mode": "brawl",
+      "scores": [
+        3,
+        1
+      ],
+      "turns": 37,
+      "shots": 37,
+      "bonusShots": 0,
+      "winner": 0,
+      "winningLineup": "A",
+      "capped": false,
+      "timedOutShots": 0,
+      "remaining": [
+        5,
+        5
+      ],
+      "events": {
+        "armed": 3,
+        "boost": 3,
+        "charge": 2,
+        "mass": 1,
+        "teleport": 1
+      },
+      "elapsedMs": 1607
+    },
+    {
+      "seed": 20263938,
+      "swapped": true,
+      "preset": "swap-midfield",
+      "mode": "brawl",
+      "scores": [
+        0,
+        3
+      ],
+      "turns": 18,
+      "shots": 18,
+      "bonusShots": 0,
+      "winner": 1,
+      "winningLineup": "A",
+      "capped": false,
+      "timedOutShots": 0,
+      "remaining": [
+        5,
+        5
+      ],
+      "events": {
+        "charge": 3
+      },
+      "elapsedMs": 726
+    },
+    {
+      "seed": 20264671,
+      "swapped": false,
+      "preset": "swap-midfield",
+      "mode": "brawl",
+      "scores": [
+        3,
+        1
+      ],
+      "turns": 31,
+      "shots": 31,
+      "bonusShots": 0,
+      "winner": 0,
+      "winningLineup": "A",
+      "capped": false,
+      "timedOutShots": 0,
+      "remaining": [
+        5,
+        5
+      ],
+      "events": {
+        "armed": 3,
+        "boost": 2
+      },
+      "elapsedMs": 1290
+    },
+    {
+      "seed": 20264671,
+      "swapped": true,
+      "preset": "swap-midfield",
+      "mode": "brawl",
+      "scores": [
+        1,
+        3
+      ],
+      "turns": 26,
+      "shots": 26,
+      "bonusShots": 0,
+      "winner": 1,
+      "winningLineup": "A",
+      "capped": false,
+      "timedOutShots": 0,
+      "remaining": [
+        5,
+        5
+      ],
+      "events": {
+        "charge": 2,
+        "teleport": 1
+      },
+      "elapsedMs": 1019
+    }
+  ],
+  "finalDefaultLineups": [
+    [
+      "fandui",
+      "kante",
+      "modi",
+      "meixi",
+      "abluo"
+    ],
+    [
+      "fandui",
+      "kante",
+      "modi",
+      "meixi",
+      "abluo"
+    ]
+  ],
+  "conclusion": "Both asymmetric presets favored lineup A in this small medium-AI sample. Final default teams therefore use the same mirrored lineup; users can still draft all 11 players. This removes preset roster differences, not a proof of equal win rates, no first-player advantage, or global skill balance. No natural removal/injury occurred in these chase-the-ball AI matches; forced-RNG and contact tests cover those mechanics separately."
+}

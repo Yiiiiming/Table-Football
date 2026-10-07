@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#141417">
+<meta name="description" content="弹指足球 Beta：从 11 位特色球员中挑选五人阵容，挑战三档 AI，或与朋友同屏对战。经典模式与球员大乱斗，自由选择。">
+<title>弹指足球 Beta · 球员大乱斗</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2319191c'/%3E%3Ccircle cx='11' cy='17' r='7' fill='%2339bdf2' stroke='%23fff5d7' stroke-width='2'/%3E%3Ccircle cx='24' cy='12' r='4' fill='%23fa346c'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css?v=beta-1">
+</head>
+<body>
+<main class="game-shell">
+<header class="masthead"><div><div class="eyebrow"><b>F.</b> FLICK FOOTBALL <span class="beta-badge">BETA 0.1</span></div><h1>FIVE-A-SIDE.<em>TAKEOVER.</em></h1></div><div class="match-label"><a class="stable-link" href="../">返回正式版 <span aria-hidden="true">↗</span></a><b id="matchType">PLAYER BRAWL</b><span id="matchInfo">球员大乱斗 · 自选五人阵容</span></div></header>
+<section class="scoreboard" aria-label="比赛比分">
+<div class="team team-green" id="team0"><span class="team-number">01</span><div><div class="team-name">冰蓝队</div><div class="team-meta" id="team0Meta">你 · 向右进攻</div></div></div>
+<div class="score-center"><div class="score"><span id="score0">0</span><span class="score-separator">:</span><span id="score1">0</span></div><span class="race">先入 3 球获胜</span></div>
+<div class="team team-gold" id="team1"><div><div class="team-name">玫红队</div><div class="team-meta" id="team1Meta">AI · 向左进攻</div></div><span class="team-number">02</span></div>
+</section>
+<div class="match-toolbar"><div class="match-status" id="status" aria-live="polite">选好五位球员，准备开球</div><div class="toolbar-actions"><button id="menu" type="button">模式菜单</button><button id="sound" type="button" aria-pressed="false">音效：关</button><button id="pause" type="button" disabled>暂停</button><button id="restart" type="button">重新开局</button></div></div>
+<div class="brawl-status" id="brawlStatus" hidden></div>
+<section class="arena show-menu" aria-label="弹指足球球场">
+<canvas id="pitch" width="1080" height="600" role="img" aria-label="每队五位球员。按住本方圆片向后拖动，松开弹射，撞白球进入对方球门。">请用新版浏览器打开游戏。</canvas>
+<div class="overlay is-menu" id="overlay">
+<img class="athlete" src="../assets/athlete.png" alt="">
+<div class="overlay-content">
+<div class="menu-intro"><span class="overlay-kicker" id="overlayKicker">BUILD YOUR FIVE. PLAY YOUR WAY.</span><h2 id="overlayTitle">PICK YOUR<em>PLAYMAKERS.</em></h2><p id="overlayText">十一种球风。五个位置。组一支你的梦幻小队。</p></div>
+<div class="menu-options" id="menuOptions">
+<div class="match-setup">
+  <section class="setup-block" aria-labelledby="ruleLabel">
+    <div class="menu-label" id="ruleLabel"><span class="section-index">01</span>选择玩法</div>
+    <div class="rule-options" role="group" aria-label="玩法规则">
+      <button class="rule-option" id="ruleBrawl" type="button" aria-pressed="true"><span class="rule-symbol" aria-hidden="true">✦</span><span><strong>球员大乱斗</strong><small>专属技能 · 自选阵容</small></span><b class="new-label">NEW</b></button>
+      <button class="rule-option" id="ruleClassic" type="button" aria-pressed="false"><span class="rule-symbol classic-symbol" aria-hidden="true">◉</span><span><strong>经典模式</strong><small>纯粹弹指足球，无球员技能</small></span></button>
+    </div>
+  </section>
+  <section class="setup-block" aria-labelledby="opponentLabel">
+    <div class="menu-label" id="opponentLabel"><span class="section-index">02</span>选择对手</div>
+    <div class="mode-options" role="group" aria-label="对战人数">
+      <button class="mode-option" id="modeSingle" type="button" aria-pressed="true"><strong>单人挑战</strong><span>与 AI 交手</span></button>
+      <button class="mode-option" id="modeMulti" type="button" aria-pressed="false"><strong>同屏双人</strong><span>好友轮流出手</span></button>
+    </div>
+    <div class="difficulty-options" id="difficultyOptions" role="group" aria-label="AI 难度">
+      <div class="menu-label difficulty-label">AI 难度<span>选择你的挑战</span></div>
+      <div class="difficulty-buttons">
+        <button class="difficulty-option" id="difficultyLow" type="button" aria-pressed="false"><strong>低</strong><span>轻松热身</span></button>
+        <button class="difficulty-option" id="difficultyMedium" type="button" aria-pressed="true"><strong>中</strong><span>认真过招</span></button>
+        <button class="difficulty-option" id="difficultyHigh" type="button" aria-pressed="false"><strong>高</strong><span>全力应战</span></button>
+      </div>
+      <p id="difficultyHelp" class="difficulty-help" aria-live="polite">攻守兼顾，适合来一场势均力敌的较量。</p>
+    </div>
+  </section>
+  <aside class="beta-note"><span class="note-heading">THE FIRST ELEVEN</span><p>技能与昵称为趣味虚构设定，无官方关联。概率与效果显示在球员卡上，比赛中可查看触发记录。</p><p>碰撞技能对同一对球员每次出手只判定一次；被动技能持续生效。具体时机以球员卡为准。</p><span class="note-foot">首发测试阵容 · 平衡性持续调整</span></aside>
+</div>
+<section class="roster-setup" id="rosterSetup" aria-labelledby="rosterHeading">
+  <div class="roster-heading"><div><div class="menu-label"><span class="section-index">03</span>组建阵容</div><h3 id="rosterHeading">你的五人首发</h3></div><span class="library-count">11 <small>位球员</small></span></div>
+  <div class="draft-team-tabs" role="group" aria-label="编辑哪支球队的阵容"><button id="draftTeam0" type="button" aria-pressed="true">冰蓝队<span>阵容 01</span></button><button id="draftTeam1" type="button" aria-pressed="false">玫红队<span>阵容 02</span></button></div>
+  <div class="draft-slots" id="draftSlots" role="group" aria-label="首发五个位置"></div>
+  <p class="draft-hint" id="draftHint" aria-live="polite">先选上方位置，再点下方球员卡替换。同队已有球员将交换位置。</p>
+  <div class="library-title"><span>球员库</span><small>同队不重复 · 两队可选同一球员</small></div>
+  <div class="player-library" id="playerLibrary"></div>
+</section>
+</div>
+<div class="menu-actions"><div class="start-actions"><button type="button" id="start" class="start-button">阵容就绪 · 开始对战 <span aria-hidden="true">↗</span></button><button type="button" id="resumeMatch" class="resume-match" hidden>继续当前比赛</button></div><span class="start-hint">按住圆片向后拖拽，松开出手<br>鼠标与触屏均可游玩</span></div>
+</div></div>
+<div id="skillToast" class="skill-toast" aria-live="polite" hidden></div>
+<div class="goal-call" id="goalCall" aria-hidden="true"><span id="goalTeam"></span><strong>进球！</strong></div>
+</section>
+<div class="shot-bar"><div class="turn-chip" id="turnChip"><span id="turnDot"></span><strong id="turnText">冰蓝队先手</strong></div><div class="power-label">力度 <div class="power-track" role="progressbar" aria-label="击球力度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="powerTrack"><div id="powerFill"></div></div><span id="powerValue">0%</span></div></div>
+<div id="rosterStrip" class="roster-strip" aria-label="在场球员状态" hidden></div>
+<div id="skillFeed" class="skill-feed" aria-label="技能触发记录" aria-live="polite" hidden></div>
+<section class="instructions" aria-label="玩法"><div><b>1</b><span>按住本方圆片</span></div><div><b>2</b><span>向后拖拽蓄力</span></div><div><b>3</b><span>松开，撞球射门</span></div></section>
+<footer><span>所有圆片停稳后，轮到另一方 · 乌龙球也计分</span><span id="footerMode">空格暂停 · 单人挑战</span></footer>
+</main>
+<script src="roster.js?v=beta-1"></script>
+<script src="physics.js?v=beta-1"></script>
+<script src="skills.js?v=beta-1"></script>
+<script src="ai.js?v=beta-1"></script>
+<script src="draft.js?v=beta-1"></script>
+<script src="game.js?v=beta-1"></script>
+</body>
+</html>
