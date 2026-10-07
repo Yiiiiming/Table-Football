@@ -1,0 +1,59 @@
+{
+  "physics": "root rounded corners 42",
+  "formation": [
+    [
+      130,
+      300
+    ],
+    [
+      270,
+      240
+    ],
+    [
+      270,
+      360
+    ],
+    [
+      423,
+      180
+    ],
+    [
+      423,
+      420
+    ]
+  ],
+  "powers": [
+    0.6,
+    0.7,
+    0.8,
+    0.9,
+    1
+  ],
+  "fineOffsets": "-24..+24 degrees, step .25",
+  "total": 17750,
+  "goals": 0,
+  "stats": {
+    "fineBallAim": {
+      "shots": 9650,
+      "goals": 0,
+      "ownGoals": 0
+    },
+    "goalAndPosts": {
+      "shots": 1500,
+      "goals": 0,
+      "ownGoals": 0
+    },
+    "bankAim": {
+      "shots": 4200,
+      "goals": 0,
+      "ownGoals": 0
+    },
+    "broad360": {
+      "shots": 2400,
+      "goals": 0,
+      "ownGoals": 0
+    }
+  },
+  "elapsedSeconds": 14.511298375,
+  "failures": []
+}

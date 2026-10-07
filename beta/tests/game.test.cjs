@@ -3,18 +3,18 @@ const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const path=require('node:path');
 const vm=require('node:vm');
-function game({mode='multi',variant='classic',plannerFactory,random=()=>.99,lineups}={}){
+function game({mode='multi',variant='classic',plannerFactory,random=()=>.99,lineups,formations=['balanced','balanced'],canStart=()=>true}={}){
   const elements=new Map(),tools=[],windowListeners={};
   const gradient={addColorStop(){}};
   const ctx=new Proxy({},{get:(o,k)=>['createLinearGradient','createRadialGradient'].includes(k)?()=>gradient:()=>{},set:()=>true});
-  function el(id){if(!elements.has(id))elements.set(id,{style:{},textContent:'',hidden:false,listeners:{},classList:{add(){},remove(){},toggle(){}},parentElement:{classList:{add(){},remove(){}}},addEventListener(n,f){this.listeners[n]=f},blur(){},setAttribute(){},getContext:()=>ctx,getBoundingClientRect:()=>({left:0,top:0,width:1080,height:600}),setPointerCapture(){},releasePointerCapture(){},hasPointerCapture:()=>true});return elements.get(id);}
+  function el(id){if(!elements.has(id))elements.set(id,{style:{},textContent:'',hidden:false,listeners:{},classList:{add(){},remove(){},toggle(){}},parentElement:{classList:{add(){},remove(){}}},addEventListener(n,f){this.listeners[n]=f},focus(){sandbox.document.activeElement=this;},blur(){if(sandbox.document.activeElement===this)sandbox.document.activeElement=null;},click(){this.listeners.click?.();},setAttribute(){},getContext:()=>ctx,getBoundingClientRect:()=>({left:0,top:0,width:1080,height:600}),setPointerCapture(){},releasePointerCapture(){},hasPointerCapture:()=>true});return elements.get(id);}
   const testMath=Object.create(Math);testMath.random=random;
-  const sandbox={Image:class{constructor(){this.complete=false}},FlickDraft:{mount:()=>({getLineups:()=>lineups?lineups.map(x=>[...x]):sandbox.FlickRoster.defaultLineups.map(x=>[...x])})},Math:testMath,Set,Map,Promise,AbortController,HTMLButtonElement:class{},setTimeout:()=>0,requestAnimationFrame(){},matchMedia:()=>({matches:true}),document:{getElementById:el,addEventListener(){},modelContext:{registerTool(t){tools.push(t)}}},window:{addEventListener(n,f){windowListeners[n]=f}}};
+  const sandbox={Image:class{constructor(){this.complete=false}},FlickDraft:{mount:()=>({getFormations:()=>[...formations],canStart,getLineups:()=>lineups?lineups.map(x=>[...x]):sandbox.FlickRoster.defaultLineups.map(x=>[...x])})},Math:testMath,Set,Map,Promise,AbortController,HTMLButtonElement:class{},setTimeout:()=>0,requestAnimationFrame(){},matchMedia:()=>({matches:true}),document:{getElementById:el,addEventListener(){},modelContext:{registerTool(t){tools.push(t)}}},window:{addEventListener(n,f){windowListeners[n]=f}}};
   const source=fs.readFileSync(path.join(__dirname,'../game.js'),'utf8').replace('  setupPieces();syncMenu();syncUI();draw();requestAnimationFrame(frame);','  setupPieces();syncMenu();syncUI();globalThis.test={state,selection,update,tickAI,startMatch,pauseMatch,openMenu,resumeFromMenu,fire,aimVector,draw,turnReady,score,getSkills:()=>skillSession};');
   vm.createContext(sandbox);
   for(const filename of ['roster.js','physics.js','skills.js','ai.js'])vm.runInContext(fs.readFileSync(path.join(__dirname,'..',filename),'utf8'),sandbox);
   if(plannerFactory)sandbox.FlickAI={...sandbox.FlickAI,createPlanner:plannerFactory};
-  vm.runInContext(source,sandbox);const api=sandbox.test;assert(api,'source hook exists');api.selection.mode=mode;api.selection.variant=variant;api.startMatch();return {...api,elements,tools,windowListeners};
+  vm.runInContext(source,sandbox);const api=sandbox.test;assert(api,'source hook exists');api.selection.mode=mode;api.selection.variant=variant;api.startMatch();return {...api,elements,tools,windowListeners,getFocus:()=>sandbox.document.activeElement};
 }
 function shoot(g,number,power,offset=0){const s=g.state,p=s.pieces.find(p=>p.team===s.turn&&p.number===number),a=Math.atan2(s.ball.y-p.y,s.ball.x-p.x)+offset*Math.PI/180;const d=power*135;s.aim={piece:p,start:{x:p.x,y:p.y},pointer:{x:p.x-Math.cos(a)*d,y:p.y-Math.sin(a)*d}};g.fire();for(let i=0;i<180*16&&s.phase==='moving';i++)g.update(1/180);assert.notEqual(s.phase,'moving','shots settle');}
 test('five discs per side, all ten rendered',()=>{const g=game();assert.equal(g.state.pieces.length,10);for(let t=0;t<2;t++)assert.equal(g.state.pieces.filter(p=>p.team===t).length,5);g.draw();});
@@ -22,7 +22,7 @@ test('only own pieces can be selected; taps do not use a turn',()=>{const g=game
 test('pause freezes motion and resume preserves the turn',()=>{const g=game();g.state.phase='moving';g.state.ball.vx=100;g.pauseMatch();const x=g.state.ball.x;g.update(.5);assert.equal(g.state.ball.x,x);g.pauseMatch();assert.equal(g.state.phase,'moving');});
 test('normal goal, own goal, reset and winning goal count once',()=>{const g=game(),s=g.state;s.phase='moving';Object.assign(s.ball,{x:1030,y:300,vx:200,vy:0});g.update(1/180);assert.equal(s.scores[0],1);g.update(.1);assert.equal(s.scores[0],1);g.update(1.4);assert.equal(s.turn,1);s.phase='moving';s.turn=0;Object.assign(s.ball,{x:50,y:300,vx:-200,vy:0});g.update(1/180);assert.equal(s.scores[1],1);g.update(1.4);s.phase='moving';s.scores=[2,1];Object.assign(s.ball,{x:1030,y:300,vx:200,vy:0});g.update(1/180);g.update(1.4);assert.equal(s.phase,'won');g.update(9);assert.equal(s.scores[0],3);});
 test('sampled opening routes are defended without special first-shot rules',()=>{const g=game();let shots=0;for(let n=1;n<=5;n++)for(let a=-18;a<=18;a+=2)for(const p of [.6,1]){g.startMatch();shoot(g,n,p,a);assert.equal(g.state.scores[0]+g.state.scores[1],0,`piece ${n}, angle ${a}, power ${p}`);shots++;}assert.equal(shots,190);});
-test('a legitimate second-turn goal is still possible',()=>{const g=game();shoot(g,4,.6);assert.equal(g.state.turn,1);shoot(g,2,1);assert.equal(g.state.scores[1],1);});
+test('a legitimate second-turn goal is possible after the keeper leaves the central lane',()=>{const g=game();shoot(g,1,.6,-30);assert.equal(g.state.turn,1);assert.equal(g.state.scores[0]+g.state.scores[1],0);shoot(g,1,1);assert.equal(g.state.scores[1],1);});
 test('agent controls validate input and share UI state',()=>{const g=game(),control=g.tools.find(t=>t.name==='control_flick_football_match'),read=g.tools.find(t=>t.name==='read_flick_football_match');assert.throws(()=>control.execute({action:'invalid'}));assert.equal(control.execute({action:'pause'}).phase,'paused');assert.equal(control.execute({action:'restart'}).phase,'aiming');assert.equal(read.execute({}).piecesPerTeam,5);});
 
 function advanceAI(g,frames=100){for(let i=0;i<frames&&g.state.phase==='aiming';i++)g.tickAI(1/30);}
@@ -119,4 +119,50 @@ test('AI obeys a bonus-piece restriction in a brawl match',()=>{
 });
 test('missing all players ends the match instead of locking AI planning',()=>{
   const g=game({variant:'brawl'}),s=g.state;s.pieces.filter(p=>p.team===1).forEach(p=>p.removed=true);s.phase='moving';g.update(1/180);assert.equal(s.phase,'won');
+});
+
+
+test('draft formations determine both teams and survive goals and match restart',()=>{
+  const formations=['defensive','balanced'],g=game({variant:'brawl',formations}),s=g.state;
+  const roster=require('../roster.js');
+  function check(ids){for(const piece of s.pieces){const [x,y]=roster.formations.find(f=>f.id===ids[piece.team]).positions[piece.number-1];assert.equal(piece.x,piece.team?1080-x:x);assert.equal(piece.y,y);}}
+  check(['defensive','balanced']);
+  formations[0]='attacking';g.openMenu();g.resumeFromMenu();check(['defensive','balanced']);
+  s.phase='moving';Object.assign(s.ball,{x:1030,y:300,vx:200,vy:0});g.update(1/180);g.update(1.4);check(['defensive','balanced']);
+  g.elements.get('restart').listeners.click();check(['defensive','balanced']);
+  g.startMatch();check(['attacking','balanced']);
+});
+test('live update triggers Navas before physics, persists charges after goal, resets new match',()=>{
+  const lineups=[['navas','kante','modi','meixi','abluo'],['fandui','haaland','beilin','qizu','dingding']];
+  const g=game({variant:'brawl',lineups}),s=g.state;
+  function rescue(){const p=s.pieces[4];g.getSkills().beginShot(p,.5);s.phase='moving';Object.assign(s.ball,{x:100,y:300,vx:-100,vy:0});g.update(1/180);}
+  rescue();assert.equal(s.pieces[0].rescuesLeft,1);assert.equal(s.ball.x,302);assert.equal(s.ball.y,63);assert.equal(s.scores[1],0);
+  Object.assign(s.ball,{x:1030,y:300,vx:200,vy:0});g.update(1/180);g.update(1.4);assert.equal(s.pieces[0].rescuesLeft,1);
+  rescue();assert.equal(s.pieces[0].rescuesLeft,0);
+  g.startMatch();assert.equal(s.pieces[0].rescuesLeft,2);
+});
+test('Space advances mode screen and agent start waits for lineup step',()=>{
+  let ready=false,next=0;const g=game({canStart:()=>ready});g.openMenu();g.state.resumePhase=null;
+  g.elements.set('draftNext',{click(){ready=true;next++;}});
+  const control=g.tools.find(t=>t.name==='control_flick_football_match');
+  assert.equal(control.execute({action:'start'}).phase,'ready');
+  g.elements.get('start').listeners.click();assert.equal(g.state.phase,'ready');
+  g.windowListeners.keydown({code:'Space',repeat:false,target:{},preventDefault(){}});
+  assert.equal(next,1);assert.equal(g.state.phase,'ready');
+  g.windowListeners.keydown({code:'Space',repeat:false,target:{},preventDefault(){}});
+  assert.equal(g.state.phase,'aiming');
+});
+
+test('ready-state restart advances to lineup instead of bypassing the menu',()=>{
+  let ready=false,next=0;const g=game({canStart:()=>ready});g.openMenu();g.state.resumePhase=null;
+  g.elements.set('draftNext',{click(){ready=true;next++;}});g.elements.get('restart').listeners.click();
+  assert.equal(next,1);assert.equal(g.state.phase,'ready');
+  g.elements.get('restart').listeners.click();assert.equal(g.state.phase,'aiming');
+});
+
+test('starting and resuming focus the pitch so Space pauses the match',()=>{
+  const g=game();assert.equal(g.getFocus(),g.elements.get('pitch'));
+  const space=()=>g.windowListeners.keydown({code:'Space',repeat:false,target:g.getFocus(),preventDefault(){}});
+  space();assert.equal(g.state.phase,'paused');g.elements.get('start').listeners.click();
+  assert.equal(g.getFocus(),g.elements.get('pitch'));space();assert.equal(g.state.phase,'paused');
 });

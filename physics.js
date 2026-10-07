@@ -6,7 +6,7 @@
   'use strict';
 
   const constants = Object.freeze({
-    W: 1080, H: 600, L: 64, R: 1016, T: 48, B: 552,
+    W: 1080, H: 600, L: 64, R: 1016, T: 48, B: 552, CORNER_RADIUS: 42,
     GT: 228, GB: 372, DT: 1 / 180, STOP_SPEED: 5, SETTLE_TIME: .32,
     MAX_LAUNCH: 640, PUCK_FRICTION: 180, BALL_FRICTION: 210,
     RESTITUTION: .78, WALL_RESTITUTION: .74, MAX_SPEED: 1100
@@ -41,6 +41,27 @@
   }
 
   function wall(body) {
+    // A disc inside a rounded corner follows the same arc, inset by its radius.
+    // Resolve this before the straight walls so a diagonal hit has one normal,
+    // rather than two axis-aligned bounces that can pin it in the corner.
+    const radius = constants.CORNER_RADIUS;
+    const cx = body.x < L + radius ? L + radius : body.x > R - radius ? R - radius : null;
+    const cy = body.y < T + radius ? T + radius : body.y > B - radius ? B - radius : null;
+    if (cx !== null && cy !== null && body.r < radius) {
+      const dx = body.x - cx, dy = body.y - cy, distance = Math.hypot(dx, dy);
+      const allowed = radius - body.r;
+      if (distance > allowed) {
+        const nx = dx / distance, ny = dy / distance;
+        body.x = cx + nx * (allowed - .000001);
+        body.y = cy + ny * (allowed - .000001);
+        const outward = body.vx * nx + body.vy * ny;
+        if (outward > 0) {
+          const impulse = (1 + constants.WALL_RESTITUTION) * outward;
+          body.vx -= impulse * nx; body.vy -= impulse * ny;
+        }
+        return;
+      }
+    }
     if (body.y - body.r < T) {
       body.y = T + body.r;
       if (body.vy < 0) body.vy *= -constants.WALL_RESTITUTION;

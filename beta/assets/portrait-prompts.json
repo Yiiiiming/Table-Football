@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "toolMode": "built-in image_gen",
-  "generationIntent": "11 distinct individual sports-game cartoon portraits",
+  "generationIntent": "12 distinct individual sports-game cartoon portraits",
   "notes": [
     "All final files are original imagegen PNG outputs; no raster processing or optimization was applied.",
-    "The user confirmed having relevant likeness authorization for the 9 requested real-person portraits.",
+    "The user confirmed having relevant likeness authorization for the 10 requested real-person portraits.",
     "Only abluo and meixi use approved wholly fictional replacements after the original named requests were blocked.",
     "Four initial portraits were restyled through the built-in image editing tool for clearer cartoon rendering. Their originals are preserved outside the public assets directory."
   ],
@@ -186,6 +186,20 @@
         {
           "mode": "generate",
           "prompt": "Use case: stylized-concept\nAsset type: one individual player avatar for a playful parody football video game. Square 1:1 image, 1024x1024.\nPrimary request: a recognizable head-and-shoulders cartoon caricature of the ADULT real footballer named below. A friendly sports portrait, with mild playful exaggeration of distinctive facial features; respectful and clearly illustrated.\nScene/backdrop: clean dark charcoal studio backdrop (#19191c), soft subtle vignette, no scenery.\nStyle/medium: OBVIOUSLY CARTOON, not a photograph: a polished painterly 3D cartoon character bust, a slightly oversized head, large expressive eyes, simplified bold geometric facial planes, chunky sculpted locks of hair, smooth handpainted cel shading, no skin pores, no individual photorealistic hairs. Playful mild caricature with strong recognizable facial shapes. High-quality modern sports-game cartoon art. Clearly stylized and illustrated at first glance.\nComposition/framing: one centered person, facing almost front with a subtle three-quarter turn, looking at the viewer. Close head and shoulders; entire hair/head within image, modest safe margin above and on both sides. Face occupies most of the square and stays readable at small thumbnail size. Plain black unbranded crew-neck athletic jersey.\nLighting/mood: soft studio key light showing the facial likeness clearly, subtle cyan rim light on the left and magenta rim light on the right. Friendly, determined neutral expression.\nConstraints: exactly one adult person; no ball or extra objects, no letters, text, numbers, brand marks, team logos, watermarks, or border; no action scene, no violent skills, no aggressive gesture.\nSubject: Recognizable adult Virgil van Dijk: medium-brown complexion, dark hair slicked back into a neat small bun, long strong face, broad nose, trimmed moustache and small chin beard, calm assured expression."
+        }
+      ]
+    },
+    {
+      "id": "navas",
+      "file": "players/navas.png",
+      "subject": "Keylor Navas",
+      "toolMode": "built-in image_gen",
+      "status": "complete",
+      "visuallyInspected": true,
+      "attempts": [
+        {
+          "mode": "generate",
+          "prompt": "Use case: stylized-concept\nAsset type: one individual player avatar for a playful football video game, matching a set of square dark sports-game cartoon portraits. Square 1:1 image, 1254x1254.\nPrimary request: a recognizable head-and-shoulders cartoon caricature of the ADULT football goalkeeper Keylor Navas. A friendly determined sports portrait, with mild playful exaggeration of distinctive facial features; respectful and clearly illustrated. Preserve his recognizable facial likeness within a true cartoon style.\nScene/backdrop: clean dark charcoal studio backdrop (#19191c), soft subtle vignette, no scenery.\nStyle/medium: OBVIOUSLY CARTOON, not a photograph: a polished painterly 3D cartoon character bust, a slightly oversized head, large expressive eyes, simplified bold geometric facial planes, chunky sculpted hair shapes, smooth handpainted cel shading, no skin pores, no individual photorealistic hairs. High-quality modern sports-game cartoon art. Clearly stylized and illustrated at first glance.\nSubject details: adult Keylor Navas, short black cropped hair with neat faded sides, warm tan complexion, dark expressive eyebrows, deep brown eyes, broad friendly smile kept subtle, strong cheekbones, broad jaw, clean-shaven or very light stubble. Mature adult proportions.\nComposition/framing: one centered person, facing almost front with a subtle three-quarter turn, looking at the viewer. Close head and shoulders; entire hair/head within image, modest safe margin above and on both sides. Face occupies most of the square and stays readable at small thumbnail size. Plain black unbranded crew-neck athletic goalkeeper jersey.\nLighting/mood: soft studio key light showing the facial likeness clearly, subtle cyan rim light on the left and magenta rim light on the right. Friendly, determined expression.\nConstraints: exactly one adult person; no ball, gloves, or extra objects; no letters, text, numbers, brand marks, team logos, watermarks, or border; no action scene or aggressive gesture."
         }
       ]
     }

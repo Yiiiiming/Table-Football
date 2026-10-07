@@ -6,7 +6,7 @@ const Physics = require('./physics.js');
 const AI = require('./ai.js');
 const Skills = require('./skills.js');
 const Roster = require('./roster.js');
-const formation = [[130, 300], [270, 240], [270, 360], [423, 180], [423, 420]];
+const formation = Roster.formations.find(f => f.id === "balanced").positions;
 const preset = ['initial', 'swap-midfield'].includes(process.argv[4]) ? process.argv[4] : 'current-default';
 const initialLineups = [['fandui', 'kante', 'modi', 'meixi', 'abluo'], ['shuiye', 'beilin', 'dingding', 'haaland', 'suya']];
 const baseLineups = (preset === 'current-default' ? Roster.defaultLineups : initialLineups).map(lineup => [...lineup]);
@@ -37,7 +37,8 @@ function match(seed, swapped, enabled = true) {
     session.beginShot(selected, choice.power); Physics.launch(selected, choice.angle, choice.power); shots++;
     let settle = 0, scored = null, ended = false;
     for (let tick = 0; tick < 3600; tick++) {
-      const result = Physics.step([...pieces, ball], Physics.constants.DT, null, session.onContact);
+      session.beforeStep();
+      const result = Physics.step([...pieces, ball], Physics.constants.DT, null, session.onContact, session.onTouch);
       if (result.goal !== null) { scored = result.goal; ended = true; break; }
       if (![0, 1].every(side => pieces.some(p => p.team === side && !p.removed))) { ended = true; break; }
       settle = result.maxSpeed < 5 ? settle + Physics.constants.DT : 0;

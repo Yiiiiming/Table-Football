@@ -28,10 +28,10 @@ test('seeded skill sample reports rates and per-match limits without asserting s
   const counts = { bite: 0, selfRed: 0, cannon: 0, charge: 0, pass: 0, through: 0, injury: 0 };
   for (let i = 0; i < runs; i++) {
     for (const [id, key] of [['suya', 'bite'], ['abluo', 'cannon'], ['meixi', 'charge'], ['modi', 'pass'], ['dingding', 'through'], ['shuiye', 'injury']]) {
-      const actor = piece(id), opponent = { ...piece('qizu', 1), x: 800, uid: 'opponent' }, mate = { ...piece('kante'), x: 650, y: 400, number: 2 };
+      const actor = piece(id), opponent = { ...piece('qizu', 1), x: 800, uid: 'opponent', mass: 5 }, mate = { ...piece('kante'), x: 650, y: 400, number: 2 };
       const white = ball(), events = [], session = Skills.createSession({ pieces: [actor, opponent, mate], ball: white, scores: [0, 0], random, onEvent: e => events.push(e) });
       session.beginTurn(0); const charged = actor.charged; session.beginShot(actor, .8); session.onContact(actor, opponent);
-      const happened = key === 'bite' ? actor.biteUsed : key === 'cannon' ? white.mass === actor.mass : key === 'charge' ? charged : key === 'pass' ? events.some(e => e.kind === 'teleport') : key === 'through' ? events.some(e => e.kind === 'armed') : opponent.injured > 0;
+      const happened = key === 'bite' ? actor.biteUsed : key === 'cannon' ? white.massMatchTeam === opponent.team && white.mass === opponent.mass : key === 'charge' ? charged : key === 'pass' ? events.some(e => e.kind === 'teleport') : key === 'through' ? events.some(e => e.kind === 'armed') : opponent.injured > 0;
       if (happened) counts[key]++;
       if (key === 'bite' && actor.removed) counts.selfRed++;
       // Repeated solver contacts must not multiply a single pair's chances.

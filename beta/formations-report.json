@@ -1,0 +1,278 @@
+{
+  "version": "0.1.1",
+  "formations": [
+    {
+      "id": "balanced",
+      "name": "均衡双锋",
+      "positions": [
+        [
+          110,
+          300
+        ],
+        [
+          110,
+          234
+        ],
+        [
+          110,
+          366
+        ],
+        [
+          423,
+          180
+        ],
+        [
+          423,
+          420
+        ]
+      ],
+      "roles": [
+        "后卫 / 门将",
+        "后卫",
+        "后卫",
+        "前锋",
+        "前锋"
+      ]
+    },
+    {
+      "id": "defensive",
+      "name": "稳守反击",
+      "positions": [
+        [
+          110,
+          300
+        ],
+        [
+          110,
+          234
+        ],
+        [
+          110,
+          366
+        ],
+        [
+          385,
+          180
+        ],
+        [
+          385,
+          420
+        ]
+      ],
+      "roles": [
+        "后卫 / 门将",
+        "后卫",
+        "后卫",
+        "前锋",
+        "前锋"
+      ]
+    },
+    {
+      "id": "attacking",
+      "name": "两翼拉开",
+      "positions": [
+        [
+          110,
+          300
+        ],
+        [
+          110,
+          234
+        ],
+        [
+          110,
+          366
+        ],
+        [
+          423,
+          140
+        ],
+        [
+          423,
+          460
+        ]
+      ],
+      "roles": [
+        "后卫 / 门将",
+        "后卫",
+        "后卫",
+        "前锋",
+        "前锋"
+      ]
+    }
+  ],
+  "totalShots": 1025694,
+  "totalGoals": 0,
+  "physics": "Actual beta/physics.js, dt 1/180 s, open goals, rounded corners, real skill hooks; no opening-shot score veto or goal-mouth closure.",
+  "scope": "Every ordered pairing of the three retained presets, both attacking sides and every eligible firing slot. Goal-target and one-side-wall-bank aim lines supplement each direct-angle grid. Skill procs are forced in the named branches. Each simulation ends only at a goal or zero remaining motion.",
+  "limitations": [
+    "Finite deterministic samples are regression evidence, not a mathematical impossibility proof over continuous angles, powers or all ordered roster assignments.",
+    "The enlarged sweep covers every ordered opponent Haaland/Fandui slot placement; it is not exhaustive over all simultaneous own-side non-shooter size permutations.",
+    "Passive Suya checks place one non-shooting friendly or enemy Suya in each slot and force both red-card outcomes, separately from the size-layout sweep.",
+    "Extra Messi actions are subsequent actions, not part of the initial shot. Post-goal setups with persistent removals are not claimed to retain full-squad opening coverage."
+  ],
+  "runs": [
+    {
+      "name": "main",
+      "command": "WORKERS=4 FIRST=1 BROAD=1 node beta/simulate-formations.cjs",
+      "profiles": [
+        "classic",
+        "qizu",
+        "haaland",
+        "fandui",
+        "kante",
+        "beilin-behind",
+        "abluo-proc",
+        "dingding-proc",
+        "modi-proc",
+        "suya-proc",
+        "shuiye-proc",
+        "navas"
+      ],
+      "configuration": {
+        "directAngleRangeDegrees": [
+          -24,
+          24
+        ],
+        "directAngleStepDegrees": 2,
+        "powers": [
+          0.5,
+          0.7,
+          0.85,
+          1
+        ],
+        "fullCircleStepDegrees": 15
+      },
+      "matchupRows": 18,
+      "shots": 249372,
+      "goals": 0,
+      "events": {},
+      "note": "Only retained final-three preset matchups are counted; trials involving the discarded fourth preset are excluded."
+    },
+    {
+      "name": "fine",
+      "command": "WORKERS=4 FIRST=1 PROFILES=kante,dingding-proc,beilin-behind INCREMENT=.25 SPREAD=18 POWERS=.5,.65,.75,.85,.9,.95,1 node beta/simulate-formations.cjs",
+      "profiles": [
+        "kante",
+        "dingding-proc",
+        "beilin-behind"
+      ],
+      "configuration": {
+        "directAngleRangeDegrees": [
+          -18,
+          18
+        ],
+        "directAngleStepDegrees": 0.25,
+        "powers": [
+          0.5,
+          0.65,
+          0.75,
+          0.85,
+          0.9,
+          0.95,
+          1
+        ]
+      },
+      "matchupRows": 18,
+      "shots": 290682,
+      "goals": 0,
+      "events": {},
+      "note": "Only retained final-three preset matchups are counted; trials involving the discarded fourth preset are excluded."
+    },
+    {
+      "name": "size",
+      "command": "WORKERS=4 FIRST=1 ALL_SIZES=1 PROFILES=qizu,kante,dingding-proc,beilin-behind,modi-proc,abluo-proc INCREMENT=6 SPREAD=6 POWERS=.85,1 node beta/simulate-formations.cjs",
+      "profiles": [
+        "qizu",
+        "kante",
+        "dingding-proc",
+        "beilin-behind",
+        "modi-proc",
+        "abluo-proc"
+      ],
+      "configuration": {
+        "directAngleRangeDegrees": [
+          -6,
+          6
+        ],
+        "directAngleStepDegrees": 6,
+        "powers": [
+          0.85,
+          1
+        ],
+        "opponentSizeLayouts": 20
+      },
+      "matchupRows": 360,
+      "shots": 255600,
+      "goals": 0,
+      "events": {},
+      "note": "Only retained final-three preset matchups are counted; trials involving the discarded fourth preset are excluded."
+    },
+    {
+      "name": "passive",
+      "command": "WORKERS=4 FIRST=1 ALL_PASSIVE=1 CAPTURE=1 PROFILES=qizu,kante,dingding-proc,beilin-behind,modi-proc,abluo-proc INCREMENT=6 SPREAD=6 POWERS=.85,1 node beta/simulate-formations.cjs",
+      "profiles": [
+        "qizu",
+        "kante",
+        "dingding-proc",
+        "beilin-behind",
+        "modi-proc",
+        "abluo-proc"
+      ],
+      "configuration": {
+        "directAngleRangeDegrees": [
+          -6,
+          6
+        ],
+        "directAngleStepDegrees": 6,
+        "powers": [
+          0.85,
+          1
+        ],
+        "passiveLayouts": 20
+      },
+      "matchupRows": 360,
+      "shots": 230040,
+      "goals": 0,
+      "events": {
+        "armed": 38232,
+        "boost": 34344,
+        "teleport": 38880,
+        "mass": 38232,
+        "removal": 12834
+      }
+    }
+  ],
+  "formerVulnerability": {
+    "formation": [
+      [
+        130,
+        300
+      ],
+      [
+        270,
+        240
+      ],
+      [
+        270,
+        360
+      ],
+      [
+        423,
+        180
+      ],
+      [
+        423,
+        420
+      ]
+    ],
+    "profile": "kante",
+    "team": 0,
+    "number": 4,
+    "angle": 0.8809588547012308,
+    "power": 1,
+    "goal": 0,
+    "coveredBy": "beta/tests/formations.test.cjs reproduces the original goal and confirms the retained preset combinations block that exact shot."
+  },
+  "ci": "node --test beta/tests/formations.test.cjs beta/tests/skills.test.cjs beta/tests/balance.test.cjs"
+}

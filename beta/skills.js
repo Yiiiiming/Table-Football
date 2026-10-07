@@ -7,19 +7,26 @@
   const rates = Object.freeze({ suya: .04, abluo: .30, meixi: .15, modi: .08, dingding: .20, shuiye: .05 });
 
   function createSession({ pieces, ball, scores, onEvent = () => {}, random = Math.random, enabled = true }) {
+    // A new match/classic session must not inherit an unfinished mass skill.
+    if (Number.isFinite(ball.massMatchBase) && ball.massMatchBase > 0) ball.mass = ball.massMatchBase;
+    delete ball.massMatchTeam; delete ball.massMatchBase;
     const baseBallMass = ball.mass;
     const bases = new Map();
     for (const piece of pieces) {
       piece.uid = piece.uid || `${piece.team}:${piece.number}`;
       bases.set(piece.uid, { r: piece.r, mass: piece.mass });
       Object.assign(piece, { removed: false, injured: 0, charged: false, shield: enabled && piece.playerId === 'fandui', biteUsed: false,
-        launchScale: 1, frictionScale: 1 });
+        rescuesLeft: enabled && piece.playerId === 'navas' ? 2 : 0, launchScale: 1, frictionScale: 1 });
     }
     let shot = null, injuryEligible = new Set();
     const roll = chance => { const n = random(); return Number.isFinite(n) && n >= 0 && n < chance; };
     const name = piece => roster.byId[piece.playerId]?.name || `球员${piece.number}`;
     function emit(title, text, kind, piece, other) {
       onEvent({ title, text, kind, pieceUid: piece?.uid || null, otherUid: other?.uid || null });
+    }
+    function restoreBallMass() {
+      ball.mass = baseBallMass;
+      delete ball.massMatchTeam; delete ball.massMatchBase;
     }
     function refresh() {
       for (const piece of pieces) {
@@ -74,13 +81,13 @@
       return false;
     }
     function finishShot({ allowExtra = true } = {}) {
-      ball.mass = baseBallMass;
+      restoreBallMass();
       if (!shot) return null;
       const goal = ball.y > C.GT + ball.r && ball.y < C.GB - ball.r &&
         (ball.x + ball.r < C.L || ball.x - ball.r > C.R);
       const extra = allowExtra && shot.extra && !shot.piece.removed && !goal ? shot.piece : null;
       shot = null;
-      if (extra) emit('灵巧过人', `${name(extra)}获得一次额外行动，仍须使用同一枚圆片。`, 'bonus', extra);
+      if (extra) emit('灵巧过人', `球停稳了，${name(extra)}还能再出手一次。`, 'bonus', extra);
       return extra;
     }
     function beginTurn(team, { bonus = false } = {}) {
@@ -91,14 +98,14 @@
         piece.charged = false;
         if (enabled && !piece.removed && piece.team === team && piece.playerId === 'meixi' && roll(rates.meixi)) {
           piece.charged = true;
-          emit('灵巧过人', `${name(piece)}已蓄力；本回合选择他出杆可再行动一次。`, 'charge', piece);
+          emit('灵巧过人', `${name(piece)}亮起金框！这回合用他出手，球停稳后还能再出手一次。`, 'charge', piece);
         }
       }
       refresh();
     }
     function beginShot(piece, power) {
       // Clear the old shot without carrying a bonus into a second shot.
-      ball.mass = baseBallMass;
+      restoreBallMass();
       shot = null;
       if (!piece || piece.removed || !pieces.includes(piece)) return false;
       refresh();
@@ -106,8 +113,12 @@
       piece.charged = false;
       if (!enabled) return true;
       if (piece.playerId === 'abluo' && roll(rates.abluo)) {
-        ball.mass = piece.mass;
-        emit('重炮轰门', '本杆白球与AB罗的质量比变为1:1。', 'mass', piece);
+        const opponent = pieces.filter(p => !p.removed && p.team === 1 - piece.team)
+          .sort((a, b) => Math.hypot(a.x - ball.x, a.y - ball.y) - Math.hypot(b.x - ball.x, b.y - ball.y))[0];
+        if (opponent) {
+          ball.mass = opponent.mass; ball.massMatchTeam = 1 - piece.team; ball.massMatchBase = baseBallMass;
+          emit('重炮轰门', '本次出手中，白球碰到对方球员时，会按与他相同的质量计算碰撞。', 'mass', piece);
+        }
       }
       if (piece.playerId === 'modi' && roll(rates.modi)) teleport(piece);
       if (piece.playerId === 'dingding' && roll(rates.dingding)) {
@@ -117,7 +128,23 @@
       if (piece.playerId === 'qizu' && power <= .5) shot.ballEffect = 'control';
       return true;
     }
+    function onTouch(a, b) {
+      if (!enabled || !shot || a.removed || b.removed || a.team === -1 || b.team === -1 || a.team === b.team) return;
+      for (const [actor, target] of [[a, b], [b, a]]) {
+        if (actor.removed || target.removed || actor.playerId !== 'suya' || actor.biteUsed) continue;
+        const key = `bite:${actor.uid}:${target.uid}`;
+        if (shot.pairs.has(key)) continue;
+        shot.pairs.add(key);
+        if (roll(rates.suya)) {
+          actor.biteUsed = true; remove(target, actor);
+          if (roll(.5)) remove(actor, actor, true);
+        }
+      }
+    }
     function onContact(a, b) {
+      // Compatibility for direct callers; the shared pair set deduplicates a
+      // touch already delivered by the pre-impulse physics hook.
+      onTouch(a, b);
       if (!enabled || !shot || a.removed || b.removed) return;
       const soccerBall = a.team === -1 ? a : b.team === -1 ? b : null;
       if (soccerBall) {
@@ -132,15 +159,6 @@
       if (a.team === b.team) return;
       for (const [actor, target] of [[a, b], [b, a]]) {
         if (actor.removed || target.removed) continue;
-        if (actor.playerId === 'suya' && !actor.biteUsed) {
-          const key = `bite:${actor.uid}:${target.uid}`;
-          if (shot.pairs.has(key)) continue;
-          shot.pairs.add(key);
-          if (roll(rates.suya)) {
-            actor.biteUsed = true; remove(target, actor);
-            if (roll(.5)) remove(actor, actor, true);
-          }
-        }
         if (actor.playerId === 'shuiye' && !target.injured) {
           const key = `injury:${actor.uid}:${target.uid}`;
           if (shot.pairs.has(key)) continue;
@@ -148,6 +166,34 @@
           if (roll(rates.shuiye)) injure(target, actor);
         }
       }
+    }
+    function beforeStep() {
+      // Only live shots can trigger the keeper; an already crossed goal line
+      // is deliberately ineligible even before the normal scoring check.
+      if (!enabled || !shot || ball.x < C.L || ball.x > C.R || ball.y < C.GT - 30 || ball.y > C.GB + 30) return false;
+      for (const keeper of pieces) {
+        if (keeper.removed || keeper.playerId !== 'navas' || keeper.rescuesLeft <= 0) continue;
+        const distance = keeper.team === 0 ? ball.x - C.L : C.R - ball.x;
+        if (distance > 110) continue;
+        const x = keeper.team === 0 ? C.L + (C.R - C.L) / 4 : C.R - (C.R - C.L) / 4;
+        const upper = C.T + ball.r + 4, lower = C.B - ball.r - 4;
+        const sides = ball.y <= (C.T + C.B) / 2 ? [upper, lower] : [lower, upper];
+        for (const side of sides) {
+          const towardMiddle = side === upper ? 1 : -1;
+          for (const inward of [0, 40, 80]) {
+            for (const offset of [0, 40, -40, 80, -80]) {
+              const targetX = x + offset, targetY = side + inward * towardMiddle;
+              if (targetX < C.L + ball.r + 4 || targetX > C.R - ball.r - 4 || targetY < upper || targetY > lower) continue;
+              if (pieces.some(p => !p.removed && Math.hypot(p.x - targetX, p.y - targetY) < p.r + ball.r + 4)) continue;
+              Object.assign(ball, { x: targetX, y: targetY, vx: 0, vy: 0 });
+              keeper.rescuesLeft--;
+              emit('海底捞月', `${name(keeper)}救下门前险球，把白球送到了己方边线附近。本场还可发动${keeper.rescuesLeft}次。`, 'rescue', keeper);
+              return true;
+            }
+          }
+        }
+      }
+      return false;
     }
     function endTurn(team) {
       for (const piece of pieces) {
@@ -161,12 +207,12 @@
       injuryEligible.clear(); refresh();
     }
     function clearRound() {
-      shot = null; ball.mass = baseBallMass;
+      shot = null; restoreBallMass();
       for (const piece of pieces) piece.charged = false;
       refresh();
     }
     refresh();
-    return Object.freeze({ beginTurn, beginShot, onContact, finishShot, endTurn, clearRound, refresh });
+    return Object.freeze({ beginTurn, beginShot, onTouch, onContact, beforeStep, finishShot, endTurn, clearRound, refresh });
   }
   return Object.freeze({ rates, createSession });
 });

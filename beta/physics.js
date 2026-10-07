@@ -6,7 +6,7 @@
   'use strict';
 
   const constants = Object.freeze({
-    W: 1080, H: 600, L: 64, R: 1016, T: 48, B: 552,
+    W: 1080, H: 600, L: 64, R: 1016, T: 48, B: 552, CORNER_RADIUS: 42,
     GT: 228, GB: 372, DT: 1 / 180, STOP_SPEED: 5, SETTLE_TIME: .32,
     MAX_LAUNCH: 640, PUCK_FRICTION: 180, BALL_FRICTION: 210,
     RESTITUTION: .78, WALL_RESTITUTION: .74, MAX_SPEED: 1100
@@ -21,11 +21,17 @@
     return true;
   }
 
-  function collide(a, b, onImpact, onContact) {
+  function collide(a, b, onImpact, onContact, onTouch) {
     if (a.removed || b.removed) return;
     let dx = b.x - a.x, dy = b.y - a.y, d = Math.hypot(dx, dy);
     const sum = a.r + b.r;
-    if (d >= sum) return;
+    if (d > sum) return;
+    if (onTouch) onTouch(a, b);
+    // Touch skills can remove either body before it delivers any impulse.
+    if (a.removed || b.removed) return;
+    if (a.team === -1 && (a.massMatchTeam === 0 || a.massMatchTeam === 1) && a.massMatchTeam === b.team) a.mass = b.mass;
+    if (b.team === -1 && (b.massMatchTeam === 0 || b.massMatchTeam === 1) && b.massMatchTeam === a.team) b.mass = a.mass;
+    if (d === sum) return;
     if (d < .0001) { dx = 1; dy = 0; d = 1; }
     const nx = dx / d, ny = dy / d, ia = 1 / a.mass, ib = 1 / b.mass;
     const overlap = sum - d + .01;
@@ -43,6 +49,27 @@
   }
 
   function wall(body) {
+    // A disc inside a rounded corner follows the same arc, inset by its radius.
+    // Resolve this before the straight walls so a diagonal hit has one normal,
+    // rather than two axis-aligned bounces that can pin it in the corner.
+    const radius = constants.CORNER_RADIUS;
+    const cx = body.x < L + radius ? L + radius : body.x > R - radius ? R - radius : null;
+    const cy = body.y < T + radius ? T + radius : body.y > B - radius ? B - radius : null;
+    if (cx !== null && cy !== null && body.r < radius) {
+      const dx = body.x - cx, dy = body.y - cy, distance = Math.hypot(dx, dy);
+      const allowed = radius - body.r;
+      if (distance > allowed) {
+        const nx = dx / distance, ny = dy / distance;
+        body.x = cx + nx * (allowed - .000001);
+        body.y = cy + ny * (allowed - .000001);
+        const outward = body.vx * nx + body.vy * ny;
+        if (outward > 0) {
+          const impulse = (1 + constants.WALL_RESTITUTION) * outward;
+          body.vx -= impulse * nx; body.vy -= impulse * ny;
+        }
+        return;
+      }
+    }
     if (body.y - body.r < T) {
       body.y = T + body.r;
       if (body.vy < 0) body.vy *= -constants.WALL_RESTITUTION;
@@ -66,7 +93,7 @@
 
   // Mutates only the supplied bodies. Goal detection deliberately precedes the
   // collision passes, matching the live game's original order of operations.
-  function step(bodies, dt, onImpact, onContact) {
+  function step(bodies, dt, onImpact, onContact, onTouch) {
     bodies = bodies.filter(body => !body.removed);
     let ball;
     for (const body of bodies) {
@@ -84,7 +111,7 @@
     }
     for (let pass = 0; pass < 3; pass++) {
       for (let i = 0; i < bodies.length; i++) {
-        for (let j = i + 1; j < bodies.length; j++) collide(bodies[i], bodies[j], onImpact, onContact);
+        for (let j = i + 1; j < bodies.length; j++) collide(bodies[i], bodies[j], onImpact, onContact, onTouch);
       }
       bodies.forEach(body => { if (!body.removed) wall(body); });
     }
